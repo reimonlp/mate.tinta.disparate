@@ -40,9 +40,11 @@ body {
 
 /* Estado Compacto (Navbar) */
 .hero.compacto {
-  padding: 15px 5%;
-  gap: 2rem;
+  padding: 10px 5%;
+  gap: 1.5rem;
   box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  justify-content: flex-start; /* Alineamos al inicio (izquierda) */
+  flex-direction: row !important; /* Forzamos fila siempre */
 }
 
 /* Logo Relativo */
@@ -130,6 +132,7 @@ h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.5rem
 @media (max-width: 768px) {
   .hero { flex-direction: column; padding: 60px 5%; gap: 2rem; }
   .hero-title h1 { font-size: 3rem; text-align: center; }
+  .hero.compacto .hero-title h1 { text-align: left; font-size: 1rem; }
   .logo-container { width: 150px; height: 150px; }
   section { padding: 60px 5%; }
 }
