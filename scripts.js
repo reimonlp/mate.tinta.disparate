@@ -16,6 +16,16 @@ const syncNavbar = () => {
 window.addEventListener('scroll', syncNavbar, { passive: true });
 window.addEventListener('resize', syncNavbar);
 
+// --- CIERRE DE MENÚ AL NAVEGAR ---
+const menuCheckbox = document.getElementById('menu-cb');
+const navLinks = document.querySelectorAll('.nav-list a');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    if (menuCheckbox) menuCheckbox.checked = false;
+  });
+});
+
 // --- LÓGICA DE GALERÍA (LIGHTBOX) ---
 const galeria = document.getElementById('galeria-encuentros');
 const visor = document.getElementById('visualizador');
