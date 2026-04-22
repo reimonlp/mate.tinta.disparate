@@ -199,3 +199,14 @@ section:nth-child(even) { background: var(--crema-oscura); }
 
 .site-footer { background: var(--verde); padding: 5rem 10% 4rem; color: var(--crema); }
 .footer-branding h3 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 2.5rem; line-height: 0.95; color: var(--crema); margin-bottom: 1rem; }
+
+.footer-container { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2.5rem; }
+.footer-branding h3 em { font-style: italic; color: var(--mostaza); }
+.footer-info { font-size: 0.8rem; opacity: 0.6; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+.instagram-link { color: var(--crema); text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 600; opacity: 0.8; transition: opacity 0.3s; }
+.instagram-link:hover { opacity: 1; }
+
+@media (max-width: 767px) {
+  .footer-container { flex-direction: column; align-items: center; text-align: center; }
+  .instagram-link { justify-content: center; }
+}
