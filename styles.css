@@ -247,15 +247,25 @@ section:nth-child(even) { background: var(--crema-oscura); }
 
 .arancel-texto {
   font-family: 'DM Sans', sans-serif;
-  font-size: 1.3rem;
-  color: var(--verde);
+  font-size: 1.2rem;
+  color: var(--texto-oscuro);
   margin-bottom: 2.5rem;
   line-height: 1.5;
-  font-weight: 500;
+}
+
+.arancel-texto strong {
+  color: var(--verde);
+  font-weight: 800;
+  font-size: 1.6rem;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .arancel-aclaracion {
   display: block;
+  font-weight: 500;
+  opacity: 0.9;
+  color: var(--verde);
 }
 
 @media (max-width: 767px) {
