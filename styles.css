@@ -34,47 +34,53 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
 /* HERO TRANSFORMABLE (2 ESTADOS) */
 .hero {
   background: var(--verde);
-  position: sticky;
-  top: 0;
+  position: relative; /* Cambiado de sticky a relative para que se desplace naturalmente */
   z-index: 1000;
   width: 100%;
-  padding: 80px 10%;
+  height: 100vh; /* Alto fijo de pantalla completa */
+  padding: 0 10%;
   display: flex;
-  flex-direction: row; /* Mantenemos row siempre para evitar saltos de layout */
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   gap: 3rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: padding, gap, box-shadow; /* Prepara al navegador */
-  transform: translateZ(0); /* Aceleración por hardware */
-  backface-visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
 }
 
-/* Estado Barra Superior */
+/* Estado Barra Superior (Navbar) */
 .hero.compacto {
+  position: fixed; /* Se vuelve fija al activarse */
+  top: 0;
+  height: 70px;
   padding: 10px 10% 10px 0;
   gap: 1.5rem;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  animation: slideDown 0.4s ease-out; /* Animación de entrada suave */
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
 }
 
 .hero-header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: inherit; /* Hereda el gap del padre para transicionar al unísono */
+  gap: inherit;
 }
 
 /* Logo */
 .logo-container {
-  width: 140px;
-  height: 140px;
+  width: 180px; /* Un poco más grande para el modo full-screen */
+  height: 180px;
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid var(--mostaza);
   background: var(--crema);
   flex-shrink: 0;
-  transition: width 0.4s ease, height 0.4s ease;
-  will-change: width, height;
+  transition: all 0.4s ease;
 }
 
 .logo-container img { width: 100%; height: 100%; object-fit: cover; }
@@ -87,14 +93,24 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
 
 /* Título */
 .hero h1 { 
-  font-size: 4rem; 
+  font-size: 5rem; /* Más imponente en 100vh */
   line-height: 1.1; 
-  transition: font-size 0.4s ease;
-  will-change: font-size;
+  transition: all 0.4s ease;
 }
 
 .hero.compacto h1 { 
-  font-size: 1rem; 
+  font-size: 1.1rem; 
+}
+
+@media (max-width: 768px) {
+  .hero { 
+    height: 80vh; /* Un poco menos en móvil para que no sea eterno */
+    padding: 0 5%;
+    gap: 1.5rem;
+  }
+  .hero h1 { font-size: 3rem; }
+  .logo-container { width: 120px; height: 120px; }
+  .hero.compacto h1 { font-size: 1rem; }
 }
 
 /* SECCIONES */

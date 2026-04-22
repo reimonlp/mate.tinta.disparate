@@ -1,10 +1,12 @@
-// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR (2 ESTADOS) ---
+// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR (100vh) ---
 const hero = document.getElementById('main-hero');
 
 window.addEventListener('scroll', () => {
   const scroll = window.scrollY;
-  // Activamos un poco antes para mayor estabilidad
-  if (scroll > 50) {
+  const viewportHeight = window.innerHeight;
+
+  // Activamos cuando el scroll supera la altura del hero original (100vh)
+  if (scroll >= viewportHeight) {
     hero.classList.add('compacto');
   } else {
     hero.classList.remove('compacto');
