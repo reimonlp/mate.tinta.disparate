@@ -212,3 +212,41 @@ h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.5rem
     justify-content: center;
   }
 }
+
+/* BREAKPOINT TINY (Pantallas muy pequeñas < 360px) */
+@media (max-width: 360px) {
+  :root {
+    --container-padding: 3%;
+  }
+
+  .hero-branding {
+    gap: 0.5rem;
+  }
+
+  .logo-container, .hero.compacto .logo-container {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .hero-title h1, .hero.compacto .hero-title h1 {
+    font-size: 0.75rem !important;
+    letter-spacing: 1px;
+  }
+
+  section {
+    padding: 60px var(--container-padding);
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .footer-branding h3 {
+    font-size: 1.8rem;
+  }
+  
+  .resena-card {
+    width: 280px;
+    padding: 1.5rem;
+  }
+}
