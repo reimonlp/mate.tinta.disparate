@@ -73,6 +73,7 @@ body {
   color: var(--crema);
   line-height: 0.95;
   transition: all 0.4s ease;
+  white-space: nowrap; /* Evita saltos de palabra */
 }
 .hero-title h1 em { font-style: italic; color: var(--mostaza); }
 
@@ -126,7 +127,9 @@ body {
 
 /* --- FORMATO MOBILE (Hamburguesa) (< 500px aprox) --- */
 @media (max-width: 500px) {
-  .hero-title h1 { font-size: 2.4rem; }
+  .hero-title h1 { 
+    font-size: 7.5vw; /* Escala fluida según el ancho de pantalla */
+  }
   
   /* Hamburguesa lógica */
   .menu-toggle {
