@@ -28,16 +28,32 @@
       
       <!-- Menú Hamburguesa (Puro CSS) -->
       <input type="checkbox" id="menu-cb" class="menu-cb">
+      
+      <!-- Overlay para cerrar al hacer clic afuera -->
+      <label for="menu-cb" class="menu-overlay"></label>
+
       <label for="menu-cb" class="menu-toggle">
         <span></span><span></span><span></span>
       </label>
 
       <nav id="hero-nav" class="hero-nav">
         <ul class="nav-list">
-          <li><a href="#manifiesto">Nosotros</a></li>
-          <li><a href="#encuentros">Encuentros</a></li>
-          <li><a href="#galeria">Registros</a></li>
-          <li><a href="#comunidad">Comunidad</a></li>
+          <li>
+            <a href="#manifiesto">Nosotros</a>
+            <label for="menu-cb"></label>
+          </li>
+          <li>
+            <a href="#encuentros">Encuentros</a>
+            <label for="menu-cb"></label>
+          </li>
+          <li>
+            <a href="#galeria">Registros</a>
+            <label for="menu-cb"></label>
+          </li>
+          <li>
+            <a href="#comunidad">Comunidad</a>
+            <label for="menu-cb"></label>
+          </li>
         </ul>
       </nav>
     </header>
@@ -79,7 +95,6 @@
         <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
         <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
         <div class="resena-card"><p class="resena-texto">"Los encuentros son mi cable a tierra. Me gusta escuchar a los jóvenes."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
-        <!-- Duplicados para el scroll infinito CSS -->
         <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
         <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
         <div class="resena-card"><p class="resena-texto">"Los encuentros son mi cable a tierra. Me gusta escuchar a los jóvenes."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
