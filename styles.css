@@ -62,6 +62,58 @@ body {
   to { transform: translateY(0); }
 }
 
+/* Navegación en el Hero */
+.hero-nav {
+  margin-left: 2rem; /* Separación del título */
+  border-left: 1px solid rgba(240, 235, 216, 0.2);
+  padding-left: 2rem;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: var(--crema);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.nav-list a:hover {
+  opacity: 1;
+  color: var(--mostaza);
+  padding-left: 5px;
+}
+
+/* Transformación en la Barra Superior */
+.hero.compacto .hero-nav {
+  margin-left: auto; /* Empuja a la derecha */
+  border-left: none;
+  padding-left: 0;
+}
+
+.hero.compacto .nav-list {
+  flex-direction: row; /* Pasa a ser horizontal */
+  gap: 2rem;
+}
+
+.hero.compacto .nav-list a {
+  font-size: 10px;
+}
+
+@media (max-width: 1024px) {
+  .hero-nav { display: none; } /* Ocultamos en tablets para no apretar */
+  .hero.compacto .hero-nav { display: block; } /* Pero en barra superior sí se ven */
+}
+
 /* Logo Relativo */
 .logo-container {
   width: 250px;
