@@ -37,14 +37,15 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
   position: relative;
   z-index: 1000;
   width: 100%;
-  height: 500px; /* Alto fijo solicitado */
-  padding: 0 10%;
+  height: 450px; /* Un poco más compacto verticalmente */
+  padding: 0 5%; /* Padding lateral mínimo */
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  gap: 3rem;
+  justify-content: center; /* Centrado en el ancho total */
+  gap: 5vw; /* Espacio proporcional al ancho */
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 /* Estado Barra Superior (Navbar) */
@@ -52,15 +53,11 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
   position: fixed;
   top: 0;
   height: 70px;
-  padding: 10px 10% 10px 0;
+  padding: 0 5% 0 0;
+  justify-content: flex-start;
   gap: 1.5rem;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   animation: slideDown 0.4s ease-out;
-}
-
-@keyframes slideDown {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(0); }
 }
 
 .hero-header {
@@ -68,15 +65,17 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
   flex-direction: row;
   align-items: center;
   gap: inherit;
+  width: 100%;
+  justify-content: center;
 }
 
-/* Logo */
+/* Logo imponente */
 .logo-container {
-  width: 140px; /* Restaurado */
-  height: 140px; /* Restaurado */
+  width: 220px; /* Más grande para llenar el ancho */
+  height: 220px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--mostaza);
+  border: 3px solid var(--mostaza);
   background: var(--crema);
   flex-shrink: 0;
   transition: all 0.4s ease;
@@ -92,24 +91,32 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
 
 /* Título */
 .hero h1 { 
-  font-size: 4rem; /* Restaurado */
-  line-height: 1.1; 
+  font-size: 5.5rem; /* Tamaño masivo para ocupar ancho */
+  line-height: 1; 
   transition: all 0.4s ease;
+  white-space: nowrap; /* Evita que el título se rompa raro */
 }
 
 .hero.compacto h1 { 
-  font-size: 1.1rem; 
+  font-size: 1.2rem; 
+  white-space: normal;
+}
+
+@media (max-width: 1024px) {
+  .hero h1 { font-size: 4rem; }
+  .logo-container { width: 180px; height: 180px; }
 }
 
 @media (max-width: 768px) {
   .hero { 
-    height: 400px;
+    height: 300px;
     padding: 0 5%;
-    gap: 1.5rem;
   }
-  .hero h1 { font-size: 2.5rem; }
-  .logo-container { width: 110px; height: 110px; }
-  .hero.compacto h1 { font-size: 1rem; }
+  .hero-header {
+    gap: 1rem;
+  }
+  .hero h1 { font-size: 2.5rem; white-space: normal; }
+  .logo-container { width: 100px; height: 100px; }
 }
 
 /* SECCIONES */
