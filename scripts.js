@@ -14,6 +14,28 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
+// --- LÓGICA DE MENÚ HAMBURGUESA ---
+const menuToggle = document.getElementById('menu-toggle');
+const heroNav = document.getElementById('hero-nav');
+const navLinks = document.querySelectorAll('.nav-list a');
+
+if (menuToggle && heroNav) {
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    heroNav.classList.toggle('active');
+    document.body.style.overflow = heroNav.classList.contains('active') ? 'hidden' : 'auto';
+  });
+
+  // Cerrar menú al hacer click en un link
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('active');
+      heroNav.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+  });
+}
+
 // --- LÓGICA DE GALERÍA (LIGHTBOX) ---
 const galeria = document.getElementById('galeria-encuentros');
 const visor = document.getElementById('visualizador');
