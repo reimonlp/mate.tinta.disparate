@@ -3,14 +3,13 @@ const hero = document.getElementById('main-hero');
 
 window.addEventListener('scroll', () => {
   const scroll = window.scrollY;
-  const threshold = 100; // Umbral fijo
-
-  if (scroll > threshold) {
+  // Activamos un poco antes para mayor estabilidad
+  if (scroll > 50) {
     hero.classList.add('compacto');
   } else {
     hero.classList.remove('compacto');
   }
-});
+}, { passive: true });
 
 // --- LÓGICA DE GALERÍA (LIGHTBOX) ---
 const galeria = document.getElementById('galeria-encuentros');

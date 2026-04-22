@@ -38,31 +38,30 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
   top: 0;
   z-index: 1000;
   width: 100%;
-  padding: 100px 10%;
+  padding: 80px 10%;
   display: flex;
-  flex-direction: column;
-  transition: all 0.4s ease-in-out; /* Animación corta y decidida */
+  flex-direction: row; /* Mantenemos row siempre para evitar saltos de layout */
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: padding, gap, box-shadow; /* Prepara al navegador */
+  transform: translateZ(0); /* Aceleración por hardware */
+  backface-visibility: hidden;
 }
 
 /* Estado Barra Superior */
 .hero.compacto {
-  padding: 10px 10% 10px 0; /* Sin padding izquierdo para que el logo pegue al borde */
+  padding: 10px 10% 10px 0;
+  gap: 1.5rem;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .hero-header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 3rem;
-  transition: gap 0.4s ease;
-}
-
-.hero.compacto .hero-header {
-  gap: 1.5rem;
+  gap: inherit; /* Hereda el gap del padre para transicionar al unísono */
 }
 
 /* Logo */
@@ -74,7 +73,8 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
   border: 2px solid var(--mostaza);
   background: var(--crema);
   flex-shrink: 0;
-  transition: all 0.4s ease;
+  transition: width 0.4s ease, height 0.4s ease;
+  will-change: width, height;
 }
 
 .logo-container img { width: 100%; height: 100%; object-fit: cover; }
@@ -86,8 +86,16 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
 }
 
 /* Título */
-.hero h1 { font-size: 4rem; line-height: 1.1; transition: font-size 0.4s ease; }
-.hero.compacto h1 { font-size: 1rem; line-height: 1.1; }
+.hero h1 { 
+  font-size: 4rem; 
+  line-height: 1.1; 
+  transition: font-size 0.4s ease;
+  will-change: font-size;
+}
+
+.hero.compacto h1 { 
+  font-size: 1rem; 
+}
 
 /* SECCIONES */
 section { padding: 100px 10%; }
