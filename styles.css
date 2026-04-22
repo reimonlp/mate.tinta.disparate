@@ -144,7 +144,7 @@ section:nth-child(even) { background: var(--crema-oscura); }
   font-size: 0.95rem;
   margin-bottom: 0.6rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* Centrado vertical perfecto */
   gap: 12px;
 }
 
