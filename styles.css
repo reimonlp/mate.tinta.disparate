@@ -161,3 +161,22 @@ section:nth-child(even) { background: var(--crema-oscura); }
 .footer-info { font-size: 0.8rem; opacity: 0.6; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
 .instagram-link { color: var(--crema); text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 600; opacity: 0.8; transition: opacity 0.3s; }
 @media (max-width: 767px) { .footer-container { flex-direction: column; align-items: center; text-align: center; } .instagram-link { justify-content: center; } }
+
+/* MAPAS */
+.map-container {
+  margin: 1.5rem 0;
+  padding-left: 0 !important;
+}
+
+.map-container::before {
+  display: none !important;
+}
+
+.map-container iframe {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: filter 0.3s ease;
+}
+
+.map-container iframe:hover {
+  filter: none !important;
+}
