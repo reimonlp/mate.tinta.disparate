@@ -3,7 +3,10 @@ const hero = document.getElementById('main-hero');
 const placeholder = document.querySelector('.hero-placeholder');
 
 const syncNavbar = () => {
+  if (!hero || !placeholder) return;
+  
   const scroll = window.scrollY;
+  // Usamos el alto real del placeholder como gatillo dinámico
   const triggerHeight = placeholder.offsetHeight;
 
   if (scroll > triggerHeight) {
@@ -13,18 +16,10 @@ const syncNavbar = () => {
   }
 };
 
+// Sincronización en scroll y redimensión
 window.addEventListener('scroll', syncNavbar, { passive: true });
 window.addEventListener('resize', syncNavbar);
-
-// --- CIERRE DE MENÚ AL NAVEGAR ---
-const menuCheckbox = document.getElementById('menu-cb');
-const navLinks = document.querySelectorAll('.nav-list a');
-
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    if (menuCheckbox) menuCheckbox.checked = false;
-  });
-});
+syncNavbar(); // Ejecución inicial
 
 // --- LÓGICA DE GALERÍA (LIGHTBOX) ---
 const galeria = document.getElementById('galeria-encuentros');
@@ -46,8 +41,25 @@ if (galeria && visor && imgFull) {
     document.body.style.overflow = 'auto';
   };
 
-  visor.addEventListener('click', cerrarVisor);
+  visor.addEventListener('click', (e) => {
+    if (e.target === visor || e.target.classList.contains('cerrar')) {
+      cerrarVisor();
+    }
+  });
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') cerrarVisor();
   });
 }
+
+// --- CIERRE DE MENÚ AL NAVEGAR (MÓVIL) ---
+const menuCheckbox = document.getElementById('menu-cb');
+const navLinks = document.querySelectorAll('.nav-list a');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    if (menuCheckbox && menuCheckbox.checked) {
+      menuCheckbox.checked = false;
+    }
+  });
+});

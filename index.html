@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=5.0">
+  <link rel="stylesheet" href="styles.css?v=6.0">
 </head>
 <body>
 
@@ -15,18 +15,16 @@
   <div class="decor-circle decor-2"></div>
 
   <div class="hero-placeholder">
-    <!-- HERO -->
     <header id="main-hero" class="hero">
       <div class="hero-branding">
         <div class="logo-container">
-          <img src="logo.jpeg" alt="Logo">
+          <img src="logo.jpeg" alt="Logo Mate, Tinta y Disparate">
         </div>
         <div class="hero-title">
           <h1>Mate, Tinta<br><em>y Disparate</em></h1>
         </div>
       </div>
       
-      <!-- Menú Hamburguesa (CSS + JS Helper) -->
       <input type="checkbox" id="menu-cb" class="menu-cb">
       <label for="menu-cb" class="menu-overlay"></label>
       <label for="menu-cb" class="menu-toggle">
@@ -34,7 +32,7 @@
       </label>
 
       <nav id="hero-nav" class="hero-nav">
-        <ul class="nav-list" id="main-nav-list">
+        <ul class="nav-list">
           <li><a href="#manifiesto">Nosotros</a></li>
           <li><a href="#encuentros">Encuentros</a></li>
           <li><a href="#galeria">Registros</a></li>
@@ -56,8 +54,24 @@
     <div class="section-label">02 · Agenda y sedes</div>
     <h2>Dónde nos juntamos</h2>
     <div class="grid-sedes">
-      <div class="card"><h3>El Cultural Olga Vázquez</h3><ul class="card-data"><li>Los domingos</li><li>17:00 a 19:00 hs</li><li>La Plata</li><li>Entrada libre</li></ul></div>
-      <div class="card"><h3>El Clú de Berisso</h3><ul class="card-data"><li>Los sábados</li><li>11:00 a 13:00 hs</li><li>Berisso</li><li>A la gorra</li></ul></div>
+      <div class="card">
+        <h3>El Cultural Olga Vázquez</h3>
+        <ul class="card-data">
+          <li>Los domingos</li>
+          <li>17:00 a 19:00 hs</li>
+          <li>Calle 60 entre 10 y 11, La Plata</li>
+          <li>Entrada libre</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>El Clú de Berisso</h3>
+        <ul class="card-data">
+          <li>Los sábados</li>
+          <li>11:00 a 13:00 hs</li>
+          <li>Calle 159 entre 11 y 12, Berisso</li>
+          <li>A la gorra</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -79,15 +93,16 @@
       <div class="resenas-track">
         <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
         <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
-        <div class="resena-card"><p class="resena-texto">"Los encuentros son mi cable a tierra. Me gusta escuchar a los jóvenes."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
+        <div class="resena-card"><p class="resena-texto">"Me gusta escuchar a los jóvenes, te abren la cabeza."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
+        <!-- Duplicados para scroll infinito -->
         <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
         <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
-        <div class="resena-card"><p class="resena-texto">"Los encuentros son mi cable a tierra. Me gusta escuchar a los jóvenes."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
+        <div class="resena-card"><p class="resena-texto">"Me gusta escuchar a los jóvenes, te abren la cabeza."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
       </div>
     </div>
   </section>
 
-  <div id="visualizador" class="visualizador"><span class="cerrar">&times;</span><img id="img-full" src=""></div>
+  <div id="visualizador" class="visualizador"><span class="cerrar">&times;</span><img id="img-full" src="" alt=""></div>
 
   <footer class="site-footer">
     <div class="footer-container">
