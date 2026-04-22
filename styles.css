@@ -2,7 +2,7 @@
   /* Paleta de Colores */
   --crema: #F0EBD8;
   --verde: #2D4A2D;
-  --mostaza: #9C6D13; /* Oscurecido para legibilidad sobre crema */
+  --mostaza: #C9922A;
   --crema-oscura: #E8E0C8;
   --texto-oscuro: #1A2E1A;
   --blanco: #FFFFFF;
@@ -128,7 +128,7 @@ body { background: var(--crema); font-family: 'DM Sans', sans-serif; color: var(
   .hero-branding { justify-content: center; width: 100%; }
   .logo-container { width: var(--sz-logo-medium); height: var(--sz-logo-medium); }
   .hero-title h1 { font-size: var(--fs-h1-medium); }
-  .hero-nav { padding-top: 1.5rem; width: 100%; }
+  .hero-nav { border-top: 1px solid rgba(240, 235, 216, 0.1); padding-top: 2rem; width: 100%; }
   .nav-list { justify-content: center; }
   .hero.compacto .nav-list { flex-direction: row; gap: 1.5rem; margin-left: auto; }
 }
@@ -183,68 +183,13 @@ body { background: var(--crema); font-family: 'DM Sans', sans-serif; color: var(
 /* SECCIONES */
 section { padding: 80px 10%; position: relative; z-index: 10; background: var(--crema); }
 section:nth-child(even) { background: var(--crema-oscura); }
-.section-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--mostaza); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; font-weight: 700; }
+.section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--mostaza); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
 
 /* COMPONENTES */
 .grid-sedes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
 .card { background: var(--blanco); padding: 2.5rem; border-radius: 4px; border-top: 3px solid var(--mostaza); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-
-.resenas-container { overflow: hidden; padding: 3rem 0; width: 100%; position: relative; }
 .resenas-track { display: flex; gap: 2rem; width: max-content; animation: scrollInfinito 40s linear infinite; }
-.resenas-track:hover { animation-play-state: paused; }
 @keyframes scrollInfinito { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 3 - 2rem * 3)); } }
-
-.resena-card { 
-  background: var(--blanco); 
-  padding: 2.5rem; 
-  width: 350px; 
-  border-radius: 4px; 
-  border-left: 5px solid var(--mostaza); 
-  flex-shrink: 0; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-}
-
-.resena-texto { 
-  font-family: 'DM Serif Display', serif; 
-  font-size: 1.1rem; 
-  font-style: italic; 
-  color: var(--verde); 
-  margin-bottom: 1.5rem; 
-  line-height: 1.4;
-}
-
-.resena-autor { 
-  font-size: 0.8rem; 
-  text-transform: uppercase; 
-  color: var(--mostaza); 
-  font-weight: 600; 
-  letter-spacing: 1px; 
-}
-
-/* GALERÍA MINIATURAS */
-.galeria-grid { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-  gap: 1rem; 
-  margin-top: 2rem;
-}
-.foto-item { 
-  aspect-ratio: 1/1; 
-  overflow: hidden; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  transition: transform 0.3s ease; 
-}
-.foto-item img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  filter: sepia(20%) contrast(90%); 
-}
-.foto-item:hover img { 
-  filter: none; 
-  transform: scale(1.1); 
-}
 
 .visualizador { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 46, 26, 0.95); display: none; justify-content: center; align-items: center; z-index: var(--z-modal); }
 .visualizador.activo { display: flex; }
@@ -253,8 +198,6 @@ section:nth-child(even) { background: var(--crema-oscura); }
 
 .site-footer { background: var(--verde); padding: 5rem 10% 4rem; color: var(--crema); }
 .footer-branding h3 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 2.5rem; line-height: 0.95; color: var(--crema); margin-bottom: 1rem; }
-
-.footer-container { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2.5rem; }
 .footer-branding h3 em { font-style: italic; color: var(--mostaza); }
 .footer-info { font-size: 0.8rem; opacity: 0.6; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
 .instagram-link { color: var(--crema); text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 600; opacity: 0.8; transition: opacity 0.3s; }
