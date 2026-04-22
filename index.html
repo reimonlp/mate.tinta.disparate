@@ -4,34 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mate, Tinta y Disparate — Encuentros de Lectura y Escritura</title>
+  <meta name="description" content="Taller de lectura y escritura intergeneracional en La Plata y Berisso. Un espacio para el disparate y la producción colectiva.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7.0">
+  <link rel="stylesheet" href="styles.css?v=8.0">
 </head>
 <body>
 
-  <div class="decor-circle decor-1"></div>
-  <div class="decor-circle decor-2"></div>
+  <div class="decor-circle decor-1" aria-hidden="true"></div>
+  <div class="decor-circle decor-2" aria-hidden="true"></div>
 
   <div class="hero-placeholder">
     <header id="main-hero" class="hero">
       <div class="hero-branding">
         <div class="logo-container">
-          <img src="logo.jpeg" alt="Logo Mate, Tinta y Disparate">
+          <img src="logo.jpeg" alt="Logo circular de Mate, Tinta y Disparate">
         </div>
         <div class="hero-title">
-          <h1>Mate, Tinta<br><em>y Disparate</em></h1>
+          <h1 class="display-font">Mate, Tinta<br><em>y Disparate</em></h1>
         </div>
       </div>
       
       <input type="checkbox" id="menu-cb" class="menu-cb">
-      <label for="menu-cb" class="menu-overlay"></label>
-      <label for="menu-cb" class="menu-toggle">
+      <label for="menu-cb" class="menu-overlay" aria-hidden="true"></label>
+      <label for="menu-cb" class="menu-toggle" aria-label="Abrir menú de navegación">
         <span></span><span></span><span></span>
       </label>
 
-      <nav id="hero-nav" class="hero-nav">
+      <nav id="hero-nav" class="hero-nav" aria-label="Menú principal">
         <ul class="nav-list">
           <li><a href="#nosotros">Nosotros</a></li>
           <li><a href="#encuentros">Encuentros</a></li>
@@ -42,76 +43,79 @@
     </header>
   </div>
 
-  <section id="nosotros">
-    <div class="section-label">01 · Nosotros</div>
-    <h2>Un espacio donde<br>nadie corrige nada</h2>
-    <p style="max-width: 600px; font-size: 1.1rem; opacity: 0.9;">
-      Soy docente y este proyecto lo armé para recuperar el placer de leer sin la presión del resultado. En nuestros encuentros leemos en voz alta, debatimos sin buscar respuestas correctas y producimos textos entre personas de todas las edades.
-    </p>
-  </section>
+  <main>
+    <section id="nosotros">
+      <span class="section-label">01 · Nosotros</span>
+      <h2>Un espacio donde<br>nadie corrige nada</h2>
+      <p style="max-width: 600px; font-size: 1.1rem; opacity: 0.9;">
+        Soy docente y este proyecto lo armé para recuperar el placer de leer sin la presión del resultado. En nuestros encuentros leemos en voz alta, debatimos sin buscar respuestas correctas y producimos textos entre personas de todas las edades.
+      </p>
+    </section>
 
-  <section id="encuentros">
-    <div class="section-label">02 · Encuentros</div>
-    <h2>Dónde nos juntamos</h2>
-    <div class="grid-sedes">
-      <div class="card">
-        <h3>C.C. Olga Vázquez</h3>
-        <ul class="card-data">
-          <li>Los sábados</li>
-          <li>15:30 a 17:30 hs</li>
-          <li>Calle 60 entre 10 y 11, La Plata</li>
-          <li>Encuentro arancelado</li>
-        </ul>
+    <section id="encuentros">
+      <span class="section-label">02 · Encuentros</span>
+      <h2>Dónde nos juntamos</h2>
+      <div class="grid-sedes">
+        <article class="card">
+          <h3>C.C. Olga Vázquez</h3>
+          <ul class="card-data" aria-label="Información del Olga Vázquez">
+            <li>Los sábados</li>
+            <li>15:30 a 17:30 hs</li>
+            <li>Calle 60 entre 10 y 11, La Plata</li>
+            <li>Encuentro arancelado</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>C.C. El Clú</h3>
+          <ul class="card-data" aria-label="Información del El Clú">
+            <li>Los domingos</li>
+            <li>15:30 a 17:30 hs</li>
+            <li>Calle 159 entre 11 y 12, Berisso</li>
+            <li>Encuentro arancelado</li>
+          </ul>
+        </article>
       </div>
-      <div class="card">
-        <h3>C.C. El Clú</h3>
-        <ul class="card-data">
-          <li>Los domingos</li>
-          <li>15:30 a 17:30 hs</li>
-          <li>Calle 159 entre 11 y 12, Berisso</li>
-          <li>Encuentro arancelado</li>
-        </ul>
+    </section>
+
+    <section id="registros">
+      <span class="section-label">03 · Registros</span>
+      <h2>Momentos de encuentro</h2>
+      <div class="galeria-grid" id="galeria-encuentros">
+        <div class="foto-item"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80" alt="Alguien escribiendo a pluma sobre papel artesanal"></div>
+        <div class="foto-item"><img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80" alt="Libros antiguos abiertos sobre una mesa de madera"></div>
+        <div class="foto-item"><img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=800&q=80" alt="Persona leyendo un libro en un ambiente cálido"></div>
+        <div class="foto-item"><img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80" alt="Mesa de taller con libros y mate"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="registros">
-    <div class="section-label">03 · Registros</div>
-    <h2>Momentos de encuentro</h2>
-    <div class="galeria-grid" id="galeria-encuentros">
-      <div class="foto-item"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80"></div>
-      <div class="foto-item"><img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80"></div>
-      <div class="foto-item"><img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=800&q=80"></div>
-      <div class="foto-item"><img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"></div>
-    </div>
-  </section>
-
-  <section id="comunidad" style="overflow-x: hidden;">
-    <div class="section-label">04 · Comunidad</div>
-    <h2>Lo que dicen</h2>
-    <div class="resenas-container">
-      <div class="resenas-track">
-        <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
-        <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
-        <div class="resena-card"><p class="resena-texto">"Me gusta escuchar a los jóvenes, te abren la cabeza."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
-        <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
-        <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
-        <div class="resena-card"><p class="resena-texto">"Me gusta escuchar a los jóvenes, te abren la cabeza."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
+    <section id="comunidad" style="overflow-x: hidden;">
+      <span class="section-label">04 · Comunidad</span>
+      <h2>Lo que dicen</h2>
+      <div class="resenas-container" aria-live="polite">
+        <div class="resenas-track">
+          <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
+          <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
+          <div class="resena-card"><p class="resena-texto">"Me gusta escuchar a los jóvenes, te abren la cabeza."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
+          <!-- Duplicados para scroll infinito -->
+          <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
+          <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
+          <div class="resena-card"><p class="resena-texto">"Me gusta escuchar a los jóvenes, te abren la cabeza."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <div id="visualizador" class="visualizador"><span class="cerrar">&times;</span><img id="img-full" src="" alt=""></div>
+  <div id="visualizador" class="visualizador" role="dialog" aria-modal="true" aria-label="Visualizador de imagen"><span class="cerrar" title="Cerrar">&times;</span><img id="img-full" src="" alt="Imagen ampliada"></div>
 
   <footer class="site-footer">
-    <div class="footer-container">
+    <div class="footer-container container">
       <div class="footer-branding">
-        <h3>Mate, Tinta<br><em>y Disparate</em></h3>
+        <h3 class="display-font">Mate, Tinta<br><em>y Disparate</em></h3>
         <div class="footer-info">LA PLATA · BERISSO · 2026</div>
       </div>
       <div class="footer-social">
-        <a href="https://instagram.com/mate.tinta.disparate" target="_blank" class="instagram-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        <a href="https://instagram.com/mate.tinta.disparate" target="_blank" class="instagram-link" aria-label="Seguinos en Instagram">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           @mate.tinta.disparate
         </a>
       </div>

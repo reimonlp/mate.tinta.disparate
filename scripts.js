@@ -1,27 +1,24 @@
-// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR ---
+// --- LÓGICA DE NAVEGACIÓN (IntersectionObserver) ---
+// Usamos una API moderna para detectar cuándo el hero sale de pantalla sin sobrecargar el scroll
 const hero = document.getElementById('main-hero');
 const placeholder = document.querySelector('.hero-placeholder');
 
-const syncNavbar = () => {
-  if (!hero || !placeholder) return;
-  
-  const scroll = window.scrollY;
-  // Usamos el alto real del placeholder como gatillo dinámico
-  const triggerHeight = placeholder.offsetHeight;
+if (hero && placeholder) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // Si el placeholder no es visible, activamos la barra compacta
+      if (!entry.isIntersecting) {
+        hero.classList.add('compacto');
+      } else {
+        hero.classList.remove('compacto');
+      }
+    });
+  }, { threshold: 0.1 }); // Se activa al salir el 90% del hero
 
-  if (scroll > triggerHeight) {
-    hero.classList.add('compacto');
-  } else {
-    hero.classList.remove('compacto');
-  }
-};
+  observer.observe(placeholder);
+}
 
-// Sincronización en scroll y redimensión
-window.addEventListener('scroll', syncNavbar, { passive: true });
-window.addEventListener('resize', syncNavbar);
-syncNavbar(); // Ejecución inicial
-
-// --- LÓGICA DE GALERÍA (LIGHTBOX) ---
+// --- LÓGICA DE GALERÍA (Delegación de Eventos) ---
 const galeria = document.getElementById('galeria-encuentros');
 const visor = document.getElementById('visualizador');
 const imgFull = document.getElementById('img-full');
@@ -32,19 +29,18 @@ if (galeria && visor && imgFull) {
     if (!item) return;
     const img = item.querySelector('img');
     imgFull.src = img.src;
+    imgFull.alt = img.alt || 'Momento de encuentro';
     visor.classList.add('activo');
     document.body.style.overflow = 'hidden';
   });
 
   const cerrarVisor = () => {
     visor.classList.remove('activo');
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
   };
 
   visor.addEventListener('click', (e) => {
-    if (e.target === visor || e.target.classList.contains('cerrar')) {
-      cerrarVisor();
-    }
+    if (e.target === visor || e.target.closest('.cerrar')) cerrarVisor();
   });
 
   document.addEventListener('keydown', (e) => {
@@ -52,14 +48,10 @@ if (galeria && visor && imgFull) {
   });
 }
 
-// --- CIERRE DE MENÚ AL NAVEGAR (MÓVIL) ---
-const menuCheckbox = document.getElementById('menu-cb');
-const navLinks = document.querySelectorAll('.nav-list a');
-
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    if (menuCheckbox && menuCheckbox.checked) {
-      menuCheckbox.checked = false;
-    }
+// --- MENÚ MÓVIL (Sincronización) ---
+const menuCb = document.getElementById('menu-cb');
+if (menuCb) {
+  document.querySelectorAll('.nav-list a').forEach(link => {
+    link.addEventListener('click', () => { menuCb.checked = false; });
   });
-});
+}
