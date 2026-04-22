@@ -1,9 +1,15 @@
-// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR ---
+// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR (PROPORCIONAL) ---
 const hero = document.getElementById('main-hero');
-const heroHeight = hero.offsetHeight;
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
+  const scroll = window.scrollY;
+  const maxScroll = 150; // Distancia en la que se completa la transformación
+  const progress = Math.min(scroll / maxScroll, 1);
+
+  // Aplicamos el progreso como una variable CSS
+  hero.style.setProperty('--p', progress);
+
+  if (scroll > 100) {
     hero.classList.add('compacto');
   } else {
     hero.classList.remove('compacto');
