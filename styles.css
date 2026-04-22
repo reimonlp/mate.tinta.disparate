@@ -22,29 +22,39 @@ body {
 .decor-2 { width: 250px; height: 250px; bottom: -50px; left: -100px; }
 
 /* HERO RELATIVO Y TRANSFORMABLE */
+.hero-placeholder {
+  min-height: 400px; /* Mismo alto que el Hero grande */
+  background: var(--verde);
+}
+
 .hero {
   background: var(--verde);
-  position: sticky;
-  top: 0;
+  position: relative; /* Cambiado de sticky a relative para que suba con el scroll */
   z-index: 1000;
   width: 100%;
   display: flex;
-  flex-direction: row; /* Uno al lado del otro */
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 5vw;
-  padding: 100px 5%; /* Espacio relativo */
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  will-change: padding, gap, box-shadow;
+  padding: 100px 5%;
+  min-height: 400px;
 }
 
 /* Estado Compacto (Navbar) */
 .hero.compacto {
+  position: fixed; /* Solo la barra es fija */
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: auto;
   padding: 10px 5%;
   gap: 1.5rem;
   box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-  justify-content: flex-start; /* Alineamos al inicio (izquierda) */
-  flex-direction: row !important; /* Forzamos fila siempre */
+  justify-content: flex-start;
+  flex-direction: row !important;
+  transform: translateY(-100%);
+  animation: slideIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 /* Logo Relativo */
