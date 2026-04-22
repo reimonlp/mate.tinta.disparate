@@ -174,9 +174,9 @@ section:nth-child(even) { background: var(--crema-oscura); }
 
 .map-container iframe {
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  transition: filter 0.3s ease;
 }
 
 .map-container iframe:hover {
-  filter: none !important;
+  transform: scale(1.01);
+  transition: transform 0.3s ease;
 }
