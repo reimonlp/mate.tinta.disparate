@@ -180,3 +180,33 @@ section:nth-child(even) { background: var(--crema-oscura); }
   transform: scale(1.01);
   transition: transform 0.3s ease;
 }
+
+/* BOTÓN INSCRIPCIÓN */
+.btn-inscripcion {
+  display: inline-block;
+  background: var(--mostaza);
+  color: var(--crema);
+  padding: 1.2rem 2.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(201, 146, 42, 0.2);
+}
+
+.btn-inscripcion:hover {
+  background: var(--verde);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(45, 74, 45, 0.2);
+}
+
+@media (max-width: 767px) {
+  .btn-inscripcion {
+    padding: 1rem 1.5rem;
+    font-size: 0.8rem;
+    width: 100%;
+  }
+}
