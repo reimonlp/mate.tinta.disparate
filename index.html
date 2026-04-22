@@ -14,11 +14,24 @@
   <div class="decor-circle decor-1"></div>
   <div class="decor-circle decor-2"></div>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="tagline">✦ Literatura · Comunidad · Disenso</div>
-    <h1>Mate, Tinta<br><em>y Disparate</em></h1>
-    <a href="#encuentros" class="btn">Conocer los encuentros</a>
+  <!-- HERO TRANSFORMABLE -->
+  <header id="main-hero" class="hero">
+    <div class="hero-header">
+      <div class="logo-container">
+        <img src="logo.jpeg" alt="Logo Mate, Tinta y Disparate">
+      </div>
+      <h1>Mate, Tinta<br><em>y Disparate</em></h1>
+    </div>
+    
+    <div class="hero-footer">
+      <a href="#encuentros" class="btn">Conocer los encuentros</a>
+      <ul class="nav-links">
+        <li><a href="#manifiesto">Nosotros</a></li>
+        <li><a href="#encuentros">Encuentros</a></li>
+        <li><a href="#galeria">Registros</a></li>
+        <li><a href="#comunidad">Comunidad</a></li>
+      </ul>
+    </div>
   </header>
 
   <!-- MANIFIESTO -->
@@ -138,98 +151,7 @@
     </div>
   </footer>
 
-  <script>
-    // --- LÓGICA DE GALERÍA ---
-    const galeria = document.getElementById('galeria-encuentros');
-    const visor = document.getElementById('visualizador');
-    const imgFull = document.getElementById('img-full');
-
-    galeria.addEventListener('click', (e) => {
-      const item = e.target.closest('.foto-item');
-      if (!item) return;
-      const img = item.querySelector('img');
-      imgFull.src = img.src;
-      imgFull.alt = img.alt;
-      visor.classList.add('activo');
-      document.body.style.overflow = 'hidden';
-    });
-
-    const cerrarVisor = () => {
-      visor.classList.remove('activo');
-      document.body.style.overflow = 'auto';
-    };
-
-    visor.addEventListener('click', cerrarVisor);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') cerrarVisor();
-    });
-
-    // --- LÓGICA DE SLIDER DE RESEÑAS ---
-    const track = document.getElementById('resenas-track');
-    const cards = document.querySelectorAll('.resena-card');
-    const dotsContainer = document.getElementById('dots-container');
-    
-    let currentIndex = 0;
-    const slideDuration = 5000;
-    let lastTime = Date.now();
-    let slideProgress = 0;
-    let isPaused = false;
-
-    // Pausar al hacer hover
-    track.addEventListener('mouseenter', () => isPaused = true);
-    track.addEventListener('mouseleave', () => isPaused = false);
-
-    // Crear puntos
-    cards.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      if (i === 0) dot.classList.add('activo');
-      dot.addEventListener('click', () => goToSlide(i));
-      dotsContainer.appendChild(dot);
-    });
-
-    const dots = document.querySelectorAll('.dot');
-
-    function updateSlider() {
-      const gap = 32;
-      const cardWidth = cards[0].offsetWidth;
-      track.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
-      
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('activo', i === currentIndex);
-        if (i !== currentIndex) dot.style.setProperty('--p', '0');
-      });
-    }
-
-    function goToSlide(index) {
-      currentIndex = index;
-      slideProgress = 0;
-      updateSlider();
-    }
-
-    function animate() {
-      const now = Date.now();
-      const delta = now - lastTime;
-      lastTime = now;
-
-      if (!isPaused) {
-        slideProgress += (delta / slideDuration) * 100;
-        
-        if (slideProgress >= 100) {
-          currentIndex = (currentIndex + 1) % cards.length;
-          goToSlide(currentIndex);
-        }
-
-        // Actualizar el progreso circular del punto activo
-        dots[currentIndex].style.setProperty('--p', slideProgress);
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    requestAnimationFrame(animate);
-    window.addEventListener('resize', updateSlider);
-  </script>
+  <script src="scripts.js"></script>
 
 </body>
 </html>
