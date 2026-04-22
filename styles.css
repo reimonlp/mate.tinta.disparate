@@ -128,7 +128,7 @@ body { background: var(--crema); font-family: 'DM Sans', sans-serif; color: var(
   .hero-branding { justify-content: center; width: 100%; }
   .logo-container { width: var(--sz-logo-medium); height: var(--sz-logo-medium); }
   .hero-title h1 { font-size: var(--fs-h1-medium); }
-  .hero-nav { border-top: 1px solid rgba(240, 235, 216, 0.1); padding-top: 2rem; width: 100%; }
+  .hero-nav { padding-top: 1.5rem; width: 100%; }
   .nav-list { justify-content: center; }
   .hero.compacto .nav-list { flex-direction: row; gap: 1.5rem; margin-left: auto; }
 }
@@ -184,7 +184,6 @@ body { background: var(--crema); font-family: 'DM Sans', sans-serif; color: var(
 section { padding: 80px 10%; position: relative; z-index: 10; background: var(--crema); }
 section:nth-child(even) { background: var(--crema-oscura); }
 .section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--mostaza); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
-.section-label::after { content: ''; flex: 1; height: 1px; background: var(--mostaza); opacity: 0.3; }
 
 /* COMPONENTES */
 .grid-sedes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
@@ -220,6 +219,31 @@ section:nth-child(even) { background: var(--crema-oscura); }
   color: var(--mostaza); 
   font-weight: 600; 
   letter-spacing: 1px; 
+}
+
+/* GALERÍA MINIATURAS */
+.galeria-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+  gap: 1rem; 
+  margin-top: 2rem;
+}
+.foto-item { 
+  aspect-ratio: 1/1; 
+  overflow: hidden; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  transition: transform 0.3s ease; 
+}
+.foto-item img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  filter: sepia(20%) contrast(90%); 
+}
+.foto-item:hover img { 
+  filter: none; 
+  transform: scale(1.1); 
 }
 
 .visualizador { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 46, 26, 0.95); display: none; justify-content: center; align-items: center; z-index: var(--z-modal); }
