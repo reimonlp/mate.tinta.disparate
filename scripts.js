@@ -1,15 +1,11 @@
-// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR (PROPORCIONAL) ---
+// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR (2 ESTADOS) ---
 const hero = document.getElementById('main-hero');
 
 window.addEventListener('scroll', () => {
   const scroll = window.scrollY;
-  const maxScroll = 150; // Distancia en la que se completa la transformación
-  const progress = Math.min(scroll / maxScroll, 1);
+  const threshold = 100; // Umbral fijo
 
-  // Aplicamos el progreso como una variable CSS
-  hero.style.setProperty('--p', progress);
-
-  if (scroll > 100) {
+  if (scroll > threshold) {
     hero.classList.add('compacto');
   } else {
     hero.classList.remove('compacto');
@@ -55,11 +51,9 @@ if (track && dotsContainer) {
   let slideProgress = 0;
   let isPaused = false;
 
-  // Pausar al hacer hover
   track.addEventListener('mouseenter', () => isPaused = true);
   track.addEventListener('mouseleave', () => isPaused = false);
 
-  // Crear puntos
   cards.forEach((_, i) => {
     const dot = document.createElement('div');
     dot.classList.add('dot');
@@ -94,18 +88,14 @@ if (track && dotsContainer) {
 
     if (!isPaused) {
       slideProgress += (delta / slideDuration) * 100;
-      
       if (slideProgress >= 100) {
         currentIndex = (currentIndex + 1) % cards.length;
         goToSlide(currentIndex);
       }
-
-      // Actualizar el progreso circular del punto activo
       if (dots[currentIndex]) {
         dots[currentIndex].style.setProperty('--p', slideProgress);
       }
     }
-
     requestAnimationFrame(animate);
   };
 
