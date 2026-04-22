@@ -99,51 +99,7 @@ h2 { font-weight: 700; font-size: 2.5rem; color: var(--verde); margin-bottom: 2r
 }
 
 .hero.compacto .hero-footer {
-  margin-top: 0;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-}
-
-.hero.compacto .nav-links {
-  opacity: 1;
-  visibility: visible;
-}
-
-.nav-links a {
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--crema);
-  font-weight: 600;
-}
-
-.nav-links a:hover { color: var(--mostaza); }
-
-.hero .btn {
-  background: var(--crema);
-  color: var(--verde);
-  padding: 1rem 2rem;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  font-weight: 600;
-  border-radius: 2px;
-  transition: opacity 0.3s ease;
-}
-
-.hero.compacto .btn {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  display: none; /* Ocultamos el bloque del botón en modo barra */
 }
 
 /* SECCIONES */
