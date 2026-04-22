@@ -74,7 +74,8 @@ section:nth-child(even) {
 /* HERO TRANSFORMABLE */
 .hero {
   background: var(--verde);
-  position: relative;
+  position: sticky; /* Cambiado de relative a sticky */
+  top: 0;
   z-index: 1000;
   width: 100%;
   padding: 120px 10% 100px;
@@ -84,15 +85,9 @@ section:nth-child(even) {
 }
 
 .hero.compacto {
-  position: fixed;
-  top: 0;
   padding: 10px 10%;
   box-shadow: 0 4px 30px rgba(0,0,0,0.3);
   min-height: 70px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .hero-header {

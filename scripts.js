@@ -3,13 +3,10 @@ const hero = document.getElementById('main-hero');
 const heroHeight = hero.offsetHeight;
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 150) {
+  if (window.scrollY > 100) {
     hero.classList.add('compacto');
-    // Añadimos un margen al body para que el contenido no salte
-    document.body.style.paddingTop = `${heroHeight}px`;
   } else {
     hero.classList.remove('compacto');
-    document.body.style.paddingTop = '0';
   }
 });
 
