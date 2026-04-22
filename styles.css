@@ -266,6 +266,9 @@ section:nth-child(even) { background: var(--crema-oscura); }
   font-weight: 500;
   opacity: 0.9;
   color: var(--verde);
+  text-wrap: balance; /* Distribuye el texto equitativamente */
+  max-width: 400px;    /* Limitamos el ancho para forzar un balance elegante */
+  margin: 0 auto;      /* Centramos el bloque */
 }
 
 @media (max-width: 767px) {
