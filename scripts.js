@@ -1,40 +1,20 @@
 // --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR ---
 const hero = document.getElementById('main-hero');
-// Guardamos la altura inicial una sola vez
-const triggerHeight = hero.offsetHeight;
+const placeholder = document.querySelector('.hero-placeholder');
 
-window.addEventListener('scroll', () => {
+const syncNavbar = () => {
   const scroll = window.scrollY;
+  const triggerHeight = placeholder.offsetHeight;
 
-  // Se activa un poco antes de que el hero salga totalmente (ej: 80% de su altura)
-  if (scroll > (triggerHeight * 0.8)) {
+  if (scroll > triggerHeight) {
     hero.classList.add('compacto');
   } else {
     hero.classList.remove('compacto');
   }
-}, { passive: true });
+};
 
-// --- LÓGICA DE MENÚ HAMBURGUESA ---
-const menuToggle = document.getElementById('menu-toggle');
-const heroNav = document.getElementById('hero-nav');
-const navLinks = document.querySelectorAll('.nav-list a');
-
-if (menuToggle && heroNav) {
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    heroNav.classList.toggle('active');
-    document.body.style.overflow = heroNav.classList.contains('active') ? 'hidden' : 'auto';
-  });
-
-  // Cerrar menú al hacer click en un link
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      menuToggle.classList.remove('active');
-      heroNav.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
-  });
-}
+window.addEventListener('scroll', syncNavbar, { passive: true });
+window.addEventListener('resize', syncNavbar);
 
 // --- LÓGICA DE GALERÍA (LIGHTBOX) ---
 const galeria = document.getElementById('galeria-encuentros');
@@ -47,7 +27,6 @@ if (galeria && visor && imgFull) {
     if (!item) return;
     const img = item.querySelector('img');
     imgFull.src = img.src;
-    imgFull.alt = img.alt;
     visor.classList.add('activo');
     document.body.style.overflow = 'hidden';
   });
@@ -61,68 +40,4 @@ if (galeria && visor && imgFull) {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') cerrarVisor();
   });
-}
-
-// --- LÓGICA DE SLIDER DE RESEÑAS ---
-const track = document.getElementById('resenas-track');
-const dotsContainer = document.getElementById('dots-container');
-
-if (track && dotsContainer) {
-  const cards = document.querySelectorAll('.resena-card');
-  let currentIndex = 0;
-  const slideDuration = 5000;
-  let lastTime = Date.now();
-  let slideProgress = 0;
-  let isPaused = false;
-
-  track.addEventListener('mouseenter', () => isPaused = true);
-  track.addEventListener('mouseleave', () => isPaused = false);
-
-  cards.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (i === 0) dot.classList.add('activo');
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  const dots = document.querySelectorAll('.dot');
-
-  const updateSlider = () => {
-    const gap = 32;
-    const cardWidth = cards[0].offsetWidth;
-    track.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
-    
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('activo', i === currentIndex);
-      if (i !== currentIndex) dot.style.setProperty('--p', '0');
-    });
-  };
-
-  const goToSlide = (index) => {
-    currentIndex = index;
-    slideProgress = 0;
-    updateSlider();
-  };
-
-  const animate = () => {
-    const now = Date.now();
-    const delta = now - lastTime;
-    lastTime = now;
-
-    if (!isPaused) {
-      slideProgress += (delta / slideDuration) * 100;
-      if (slideProgress >= 100) {
-        currentIndex = (currentIndex + 1) % cards.length;
-        goToSlide(currentIndex);
-      }
-      if (dots[currentIndex]) {
-        dots[currentIndex].style.setProperty('--p', slideProgress);
-      }
-    }
-    requestAnimationFrame(animate);
-  };
-
-  requestAnimationFrame(animate);
-  window.addEventListener('resize', updateSlider);
 }

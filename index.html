@@ -7,8 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-  <!-- Versión añadida para forzar recarga de estilos -->
-  <link rel="stylesheet" href="styles.css?v=2.0">
+  <link rel="stylesheet" href="styles.css?v=4.0">
 </head>
 <body>
 
@@ -18,19 +17,20 @@
   <div class="hero-placeholder">
     <!-- HERO -->
     <header id="main-hero" class="hero">
-      <div class="logo-container">
-        <img src="logo.jpeg" alt="Logo Mate, Tinta y Disparate">
-      </div>
-      <div class="hero-title">
-        <h1>Mate, Tinta<br><em>y Disparate</em></h1>
+      <div class="hero-branding">
+        <div class="logo-container">
+          <img src="logo.jpeg" alt="Logo">
+        </div>
+        <div class="hero-title">
+          <h1>Mate, Tinta<br><em>y Disparate</em></h1>
+        </div>
       </div>
       
-      <!-- Menú Hamburguesa (visible en móvil) -->
-      <div id="menu-toggle" class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <!-- Menú Hamburguesa (Puro CSS) -->
+      <input type="checkbox" id="menu-cb" class="menu-cb">
+      <label for="menu-cb" class="menu-toggle">
+        <span></span><span></span><span></span>
+      </label>
 
       <nav id="hero-nav" class="hero-nav">
         <ul class="nav-list">
@@ -43,26 +43,20 @@
     </header>
   </div>
 
-  <!-- MANIFIESTO -->
   <section id="manifiesto">
     <div class="section-label">01 · Quiénes somos</div>
     <h2>Un espacio donde<br>nadie corrige nada</h2>
     <p style="max-width: 600px; font-size: 1.1rem; opacity: 0.9;">
       Soy docente y este proyecto lo armé para recuperar el placer de leer sin la presión del resultado. En nuestros encuentros leemos en voz alta, debatimos sin buscar respuestas correctas y producimos textos entre personas de todas las edades.
     </p>
-    <p style="max-width: 600px; margin-top: 1.5rem; opacity: 0.8;">
-      Creemos que la literatura es un derecho, no un examen. Aquí la consigna es el punto de partida para que aparezca lo propio, lo inesperado y, sobre todo, el disparate.
-    </p>
   </section>
 
-  <!-- El resto de las secciones se mantienen igual... -->
-  <!-- [Secciones: Encuentros, Registros, Comunidad, Footer] -->
   <section id="encuentros">
     <div class="section-label">02 · Agenda y sedes</div>
     <h2>Dónde nos juntamos</h2>
     <div class="grid-sedes">
-      <div class="card"><h3>El Cultural Olga Vázquez</h3><ul class="card-data"><li>Los domingos</li><li>17:00 a 19:00 hs</li><li>Calle 60 entre 10 y 11, La Plata</li><li>Entrada libre</li></ul></div>
-      <div class="card"><h3>El Clú de Berisso</h3><ul class="card-data"><li>Los sábados</li><li>11:00 a 13:00 hs</li><li>Calle 159 entre 11 y 12, Berisso</li><li>A la gorra</li></ul></div>
+      <div class="card"><h3>El Cultural Olga Vázquez</h3><ul class="card-data"><li>Los domingos</li><li>17:00 a 19:00 hs</li><li>La Plata</li><li>Entrada libre</li></ul></div>
+      <div class="card"><h3>El Clú de Berisso</h3><ul class="card-data"><li>Los sábados</li><li>11:00 a 13:00 hs</li><li>Berisso</li><li>A la gorra</li></ul></div>
     </div>
   </section>
 
@@ -79,26 +73,35 @@
 
   <section id="comunidad" style="overflow-x: hidden;">
     <div class="section-label">04 · Comunidad</div>
-    <h2>Lo que dicen<br>quienes vienen</h2>
+    <h2>Lo que dicen</h2>
     <div class="resenas-container">
-      <div id="resenas-track" class="resenas-track">
+      <div class="resenas-track">
         <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
         <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
         <div class="resena-card"><p class="resena-texto">"Los encuentros son mi cable a tierra. Me gusta escuchar a los jóvenes."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
-        <div class="resena-card"><p class="resena-texto">"La calidez que hay en la ronda es difícil de encontrar hoy en día."</p><span class="resena-autor">✦ Elena, 19 años</span></div>
+        <!-- Duplicados para el scroll infinito CSS -->
+        <div class="resena-card"><p class="resena-texto">"Poder traer a mis hijos y compartir la mesa de escritura con ellos es hermoso."</p><span class="resena-autor">✦ Lucía, 38 años</span></div>
+        <div class="resena-card"><p class="resena-texto">"Acá nadie te corrige con el lápiz rojo. Me devolvió las ganas de escribir."</p><span class="resena-autor">✦ Javier, 45 años</span></div>
+        <div class="resena-card"><p class="resena-texto">"Los encuentros son mi cable a tierra. Me gusta escuchar a los jóvenes."</p><span class="resena-autor">✦ Marcos, 68 años</span></div>
       </div>
     </div>
-    <div id="dots-container" class="resenas-nav"></div>
   </section>
 
   <div id="visualizador" class="visualizador"><span class="cerrar">&times;</span><img id="img-full" src=""></div>
 
-  <footer style="background: var(--verde); padding: 4rem 10%; color: var(--crema);">
-    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-      <div><div class="display-font" style="font-size: 1.5rem; font-weight: 900;">Mate, Tinta <em>y Disparate</em></div><div style="font-size: 0.8rem; opacity: 0.6; letter-spacing: 2px;">LA PLATA · BERISSO · 2026</div></div>
+  <footer style="background: var(--verde); padding: 5rem 10% 4rem; color: var(--crema);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2.5rem;">
+      <div class="footer-branding">
+        <h3 style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 2.5rem; line-height: 0.95; color: var(--crema); margin-bottom: 1rem;">
+          Mate, Tinta<br><em style="font-style: italic; color: var(--mostaza);">y Disparate</em>
+        </h3>
+        <div style="font-size: 0.8rem; opacity: 0.6; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">
+          LA PLATA · BERISSO · 2026
+        </div>
+      </div>
       <div style="text-align: right;">
-        <a href="https://instagram.com/mate.tinta.disparate" target="_blank" style="color: var(--crema); text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; opacity: 0.8;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        <a href="https://instagram.com/mate.tinta.disparate" target="_blank" style="color: var(--crema); text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 600; opacity: 0.8; transition: opacity 0.3s;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           @mate.tinta.disparate
         </a>
       </div>
