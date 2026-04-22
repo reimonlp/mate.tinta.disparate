@@ -26,7 +26,7 @@ body {
 .decor-2 { width: 25vw; height: 25vw; bottom: -5vw; left: -10vw; }
 
 /* HERO ESTRUCTURA BASE */
-.hero-placeholder { min-height: 400px; background: var(--verde); }
+.hero-placeholder { min-height: 300px; background: var(--verde); }
 
 .hero {
   background: var(--verde);
@@ -35,10 +35,9 @@ body {
   width: 100%;
   display: flex;
   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-  padding: 5rem var(--container-padding);
 }
 
-/* ESTADO COMPACTO (NAVBAR COMÚN A TODOS) */
+/* ESTADO COMPACTO (NAVBAR) */
 .hero.compacto {
   position: fixed;
   top: 0;
@@ -89,16 +88,17 @@ body {
 }
 .nav-list a:hover { color: var(--mostaza); }
 
-/* --- FORMATO WIDE (> 1024px) --- */
-@media (min-width: 1025px) {
+/* --- FORMATO WIDE (>= 768px) --- */
+@media (min-width: 768px) {
   .hero {
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 4vw;
+    padding: 6rem var(--container-padding);
   }
-  .logo-container { width: 250px; height: 250px; }
-  .hero-title h1 { font-size: 6rem; text-align: left; }
+  .logo-container { width: 220px; height: 220px; }
+  .hero-title h1 { font-size: 5rem; text-align: left; }
   
   .hero-nav {
     border-left: 1px solid rgba(240, 235, 216, 0.2);
@@ -108,16 +108,17 @@ body {
   .nav-list a { font-size: 0.7rem; }
 }
 
-/* --- FORMATO MEDIUM (768px - 1024px) --- */
-@media (max-width: 1024px) and (min-width: 768px) {
+/* --- FORMATO MEDIUM (< 768px) --- */
+@media (max-width: 767px) {
   .hero {
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 2rem;
+    padding: 4rem var(--container-padding);
   }
-  .logo-container { width: 180px; height: 180px; }
-  .hero-title h1 { font-size: 4.5rem; }
+  .logo-container { width: 160px; height: 160px; }
+  .hero-title h1 { font-size: 3rem; }
   
   /* HR para medium */
   .hero::after {
@@ -125,27 +126,19 @@ body {
     width: 60px;
     height: 1px;
     background: var(--mostaza);
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     opacity: 0.5;
   }
   
-  .nav-list { flex-direction: row; gap: 2.5rem; }
-  .nav-list a { font-size: 0.8rem; }
+  .nav-list { flex-direction: row; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+  .nav-list a { font-size: 0.75rem; }
 }
 
-/* --- FORMATO MOBILE (< 768px) --- */
-@media (max-width: 767px) {
-  .hero {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.5rem;
-    padding: 4rem 5%;
-  }
-  .logo-container { width: 140px; height: 140px; }
-  .hero-title h1 { font-size: 2.8rem; }
-
-  /* Menú Hamburguesa */
+/* --- FORMATO MOBILE (Hamburguesa) (< 500px aprox) --- */
+@media (max-width: 500px) {
+  .hero-title h1 { font-size: 2.4rem; }
+  
+  /* Hamburguesa lógica */
   .menu-toggle {
     display: block;
     cursor: pointer;
@@ -172,9 +165,11 @@ body {
     align-items: flex-start;
   }
   .nav-list a { font-size: 1.2rem; }
+  
+  .hero::after { display: none; } /* Ocultar HR en móvil muy pequeño */
 }
 
-/* TRANSICIÓN A NAVBAR COMPACTA (Ajustes de escala) */
+/* TRANSICIÓN A NAVBAR COMPACTA */
 .hero.compacto .logo-container { width: 50px; height: 50px; border-width: 1px; }
 .hero.compacto .hero-title h1 { font-size: 1rem; text-align: left; }
 .hero.compacto .hero-title h1 br { display: block; }
@@ -196,7 +191,7 @@ body {
 .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg); top: 9px; }
 
 /* SECCIONES CONTENIDO */
-section { padding: 100px 10%; position: relative; z-index: 10; background: var(--crema); }
+section { padding: 80px 10%; position: relative; z-index: 10; background: var(--crema); }
 section:nth-child(even) { background: var(--crema-oscura); }
 .section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--mostaza); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
 .section-label::after { content: ''; flex: 1; height: 1px; background: var(--mostaza); opacity: 0.3; }
