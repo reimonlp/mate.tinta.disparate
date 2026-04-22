@@ -78,11 +78,14 @@ body {
 .hero-title h1 em { font-style: italic; color: var(--mostaza); }
 
 .hero.compacto .hero-title h1 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.1;
+  text-align: left;
 }
 
-.hero.compacto .hero-title h1 br { display: none; }
+.hero.compacto .hero-title h1 br {
+  display: block; /* Forzamos las dos líneas */
+}
 
 /* SECCIONES */
 section { padding: 100px 10%; position: relative; z-index: 10; background: var(--crema); }
