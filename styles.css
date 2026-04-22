@@ -2,7 +2,7 @@
   /* Paleta de Colores */
   --crema: #F0EBD8;
   --verde: #2D4A2D;
-  --mostaza: #C9922A;
+  --mostaza: #9C6D13; /* Oscurecido para legibilidad sobre crema */
   --crema-oscura: #E8E0C8;
   --texto-oscuro: #1A2E1A;
   --blanco: #FFFFFF;
@@ -183,7 +183,7 @@ body { background: var(--crema); font-family: 'DM Sans', sans-serif; color: var(
 /* SECCIONES */
 section { padding: 80px 10%; position: relative; z-index: 10; background: var(--crema); }
 section:nth-child(even) { background: var(--crema-oscura); }
-.section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--mostaza); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+.section-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--mostaza); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; font-weight: 700; }
 
 /* COMPONENTES */
 .grid-sedes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
