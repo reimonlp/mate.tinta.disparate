@@ -1,12 +1,13 @@
-// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR (Basada en alto del Hero) ---
+// --- LÓGICA DE TRANSFORMACIÓN HERO -> NAVBAR ---
 const hero = document.getElementById('main-hero');
+// Guardamos la altura inicial una sola vez
+const triggerHeight = hero.offsetHeight;
 
 window.addEventListener('scroll', () => {
   const scroll = window.scrollY;
-  const heroHeight = hero.offsetHeight;
 
-  // Se activa cuando el scroll supera la altura total del hero
-  if (scroll >= heroHeight) {
+  // Se activa un poco antes de que el hero salga totalmente (ej: 80% de su altura)
+  if (scroll > (triggerHeight * 0.8)) {
     hero.classList.add('compacto');
   } else {
     hero.classList.remove('compacto');

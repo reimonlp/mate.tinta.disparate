@@ -57,6 +57,11 @@ body {
   animation: slideIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
+@keyframes slideIn {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
 /* Logo Relativo */
 .logo-container {
   width: 250px;
