@@ -135,6 +135,40 @@ section:nth-child(even) { background: var(--crema-oscura); }
 .grid-sedes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
 .card { background: var(--blanco); padding: 2.5rem; border-radius: 4px; border-top: 3px solid var(--mostaza); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
+.card-data {
+  list-style: none;
+  margin-top: 1.2rem;
+}
+
+.card-data li {
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.card-data li:not(.map-container)::before {
+  content: '→';
+  color: var(--mostaza);
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.map-container {
+  margin: 0.5rem 0 1.5rem;
+  padding-left: 0 !important;
+  display: block;
+}
+
+.map-container iframe {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 0;
+  border-radius: 4px;
+  width: 100%;
+  height: 250px;
+}
+
 .galeria-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 2rem; }
 .foto-item { aspect-ratio: 1/1; overflow: hidden; border-radius: 4px; cursor: pointer; border: 1px solid rgba(45,74,45,0.1); }
 .foto-item img { width: 100%; height: 100%; object-fit: cover; filter: sepia(15%) contrast(90%); transition: 0.3s; }
@@ -161,25 +195,6 @@ section:nth-child(even) { background: var(--crema-oscura); }
 .footer-info { font-size: 0.8rem; opacity: 0.6; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
 .instagram-link { color: var(--crema); text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: 600; opacity: 0.8; transition: opacity 0.3s; }
 @media (max-width: 767px) { .footer-container { flex-direction: column; align-items: center; text-align: center; } .instagram-link { justify-content: center; } }
-
-/* MAPAS */
-.map-container {
-  margin: 1.5rem 0;
-  padding-left: 0 !important;
-}
-
-.map-container::before {
-  display: none !important;
-}
-
-.map-container iframe {
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-.map-container iframe:hover {
-  transform: scale(1.01);
-  transition: transform 0.3s ease;
-}
 
 /* BOTÓN INSCRIPCIÓN */
 .btn-inscripcion {
