@@ -426,6 +426,7 @@ section:nth-child(even) { background: var(--crema-oscura); }
   font-size: 2rem;
   color: var(--mostaza);
   margin-bottom: 2rem;
+  text-wrap: balance; /* Balanceado de texto solicitado */
 }
 
 .bio-content p {
