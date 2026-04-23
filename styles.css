@@ -297,40 +297,99 @@ section:nth-child(even) { background: var(--crema-oscura); }
   text-decoration: underline;
 }
 
-/* PREGUNTAS FRECUENTES (FAQ) */
-.faq-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  margin-top: 3rem;
+/* PREGUNTAS FRECUENTES (ACORDEÓN) */
+.faq-container {
+  max-width: 800px;
+  margin: 3rem auto 0;
 }
 
 .faq-item {
   border-bottom: 1px solid rgba(45, 74, 45, 0.1);
-  padding-bottom: 1.5rem;
+  margin-bottom: 0;
+}
+
+.faq-item summary {
+  padding: 2rem 0;
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
 }
 
 .faq-pregunta {
   font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
+  color: var(--verde);
+  transition: color 0.3s ease;
+  padding-right: 2rem;
+}
+
+.faq-item:hover .faq-pregunta {
   color: var(--mostaza);
-  margin-bottom: 1rem;
-  display: block;
+}
+
+.faq-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--mostaza);
+  transition: transform 0.3s ease;
+}
+
+/* Línea horizontal */
+.faq-icon::before {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+/* Línea vertical (para el +) */
+.faq-icon::after {
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Rotación al abrir */
+.faq-item[open] .faq-icon::after {
+  transform: translateX(-50%) rotate(90deg);
+  opacity: 0;
 }
 
 .faq-respuesta {
-  font-size: 1rem;
+  padding: 0 0 2rem;
+  font-size: 1.1rem;
   color: var(--texto-oscuro);
-  opacity: 0.9;
-  line-height: 1.5;
+  opacity: 0.85;
+  line-height: 1.6;
+  max-width: 650px;
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 767px) {
-  .faq-grid {
-    gap: 1.5rem;
-  }
-  .faq-pregunta {
-    font-size: 1.1rem;
-  }
+  .faq-pregunta { font-size: 1.15rem; }
+  .faq-respuesta { font-size: 1rem; }
 }
