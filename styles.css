@@ -296,3 +296,41 @@ section:nth-child(even) { background: var(--crema-oscura); }
   opacity: 0.7;
   text-decoration: underline;
 }
+
+/* PREGUNTAS FRECUENTES (FAQ) */
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(45, 74, 45, 0.1);
+  padding-bottom: 1.5rem;
+}
+
+.faq-pregunta {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--mostaza);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.faq-respuesta {
+  font-size: 1rem;
+  color: var(--texto-oscuro);
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+@media (max-width: 767px) {
+  .faq-grid {
+    gap: 1.5rem;
+  }
+  .faq-pregunta {
+    font-size: 1.1rem;
+  }
+}
