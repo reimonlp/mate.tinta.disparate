@@ -119,7 +119,7 @@ body { background: var(--crema); font-family: 'DM Sans', sans-serif; color: var(
   .hero.compacto .hero-title h1 { font-size: 0.85rem; }
   .hero.compacto .hero-branding { gap: 0.8rem !important; }
 
-  .menu-toggle { display: flex !important; margin-left: auto; }
+  .menu-toggle { display: flex !important; margin-left: auto; margin-right: 1rem; }
   .menu-cb:checked ~ .menu-toggle span:nth-child(1) { transform: rotate(45deg); top: 14px; }
   .menu-cb:checked ~ .menu-toggle span:nth-child(2) { opacity: 0; }
   .menu-cb:checked ~ .menu-toggle span:nth-child(3) { transform: rotate(-45deg); top: 14px; }
