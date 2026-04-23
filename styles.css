@@ -299,13 +299,22 @@ section:nth-child(even) { background: var(--crema-oscura); }
 
 /* PREGUNTAS FRECUENTES (ACORDEÓN) */
 .faq-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 3rem auto 0;
+  background: var(--blanco);
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  border: 1px solid rgba(45, 74, 45, 0.08);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.04);
 }
 
 .faq-item {
-  border-bottom: 1px solid rgba(45, 74, 45, 0.1);
+  border-bottom: 1px solid rgba(45, 74, 45, 0.06);
   margin-bottom: 0;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
 }
 
 .faq-item summary {
