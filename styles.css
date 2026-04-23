@@ -122,8 +122,20 @@ body { background: var(--crema); font-family: 'DM Sans', sans-serif; color: var(
   .hero.compacto .logo-container { width: 55px !important; height: 55px !important; border-width: 1px !important; }
   .hero.compacto .hero-title h1 { font-size: 1.1rem !important; text-align: left !important; }
   .hero.compacto .hero-branding { justify-content: flex-start !important; gap: 1.5rem !important; }
-  .hero.compacto .hero-nav { display: block !important; margin-left: auto !important; border: none !important; padding: 0 !important; }
-  .hero.compacto .nav-list { flex-direction: row !important; gap: 2.5rem !important; }
+.hero.compacto .hero-nav { 
+  display: block !important; 
+  margin-left: auto !important; 
+  border: none !important; 
+  padding: 0 !important;
+  max-width: 60%; /* Limitamos para dejar espacio al branding */
+}
+
+.hero.compacto .nav-list { 
+  flex-direction: row !important; 
+  /* Gap dinámico: mínimo 1rem, óptimo 2vw, máximo 2.5rem */
+  gap: clamp(1rem, 2vw, 2.5rem) !important; 
+  justify-content: flex-end;
+}
 }
 
 /* SECCIONES CONTENIDO */
