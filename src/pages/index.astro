@@ -1,74 +1,233 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Colecciones dinámicas
+const dudasEntries = await getCollection('dudas');
+const dudas = dudasEntries.sort((a, b) => a.data.orden - b.data.orden);
+
+const encuentrosEntries = await getCollection('encuentros');
+const encuentros = encuentrosEntries.sort((a, b) => a.data.orden - b.data.orden);
+
+const comunidadEntries = await getCollection('comunidad');
+
+// Lectura dinámica de fotos
+const photosDir = path.join(process.cwd(), 'public/photos');
+let photos = [];
+if (fs.existsSync(photosDir)) {
+  const files = fs.readdirSync(photosDir);
+  photos = files
+    .filter(file => /\.(jpg|jpeg|png|webp|gif)$/i.test(file))
+    .sort((a, b) => b.localeCompare(a));
+}
 ---
 
 <Layout title="Mate, Tinta y Disparate — Encuentros de Lectura y Escritura">
-	<style>
-		/* Estilo específico para ocultar el header compacto en la home y mostrar el hero grande */
-		:global(.compacto-multipagina) {
-			display: none; /* Ocultamos el header del layout por defecto en la home, ya que la home tiene su propio Hero */
-		}
-	</style>
 
-	<div class="hero-placeholder">
-		<header id="main-hero" class="hero">
-			<div class="hero-branding">
-				<div class="logo-container">
-					<img src="/logo.jpeg" alt="Logo circular de Mate, Tinta y Disparate">
-				</div>
-				<div class="hero-title">
-					<h1 class="display-font">Mate, Tinta<br><em>y Disparate</em></h1>
-				</div>
-			</div>
-			
-			<input type="checkbox" id="menu-cb-home" class="menu-cb">
-			<label for="menu-cb-home" class="menu-overlay" aria-hidden="true"></label>
-			<label for="menu-cb-home" class="menu-toggle" aria-label="Abrir menú de navegación">
-				<span></span><span></span><span></span>
-			</label>
+  <div class="hero-placeholder">
+    <header id="main-hero" class="hero">
+      <div class="hero-branding">
+        <div class="logo-container">
+          <img src="/logo.jpeg" alt="Logo circular de Mate, Tinta y Disparate">
+        </div>
+        <div class="hero-title">
+          <h1 class="display-font">Mate, Tinta<br><em>y Disparate</em></h1>
+        </div>
+      </div>
+      
+      <input type="checkbox" id="menu-cb" class="menu-cb">
+      <label for="menu-cb" class="menu-overlay" aria-hidden="true"></label>
+      <label for="menu-cb" class="menu-toggle" aria-label="Abrir menú de navegación">
+        <span></span><span></span><span></span>
+      </label>
 
-			<nav id="hero-nav" class="hero-nav" aria-label="Menú principal">
-				<ul class="nav-list">
-					<li><a href="/propuesta">Propuesta</a></li>
-					<li><a href="/registros">Registros</a></li>
-					<li><a href="/dudas">Dudas</a></li>
-					<li><a href="/encuentros">Encuentros</a></li>
-					<li><a href="/comunidad">Comunidad</a></li>
-				</ul>
-			</nav>
-		</header>
-	</div>
+      <nav id="hero-nav" class="hero-nav" aria-label="Menú principal">
+        <ul class="nav-list">
+          <li><a href="#propuesta">Propuesta</a></li>
+          <li><a href="#registros">Registros</a></li>
+          <li><a href="#preguntas">Dudas</a></li>
+          <li><a href="#encuentros">Encuentros</a></li>
+          <li><a href="#comunidad">Comunidad</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
 
-	<section id="propuesta" style="padding-top: 4rem;">
-		<span class="section-label">01 · Propuesta</span>
-		
-		<div class="bio-container">
-			<p class="bio-intro">Hola, ¿cómo estás? Me presento y te cuento: soy Agustina</p>
-			<div class="bio-content">
-				<p>Leo desde los cinco años, cuando empecé a perderme —y a encontrarme— entre libros. Desde entonces, sigo ahí: leyendo, escribiendo, subrayando, volviendo.</p>
-				
-				<p>Soy profesora de nivel inicial y me formé en literatura infantil y juvenil, didáctica y pedagogía. Pero lo que más me interesa es lo que pasa cuando las palabras se aflojan: cuando dejan de ser consigna y se vuelven juego, prueba, desvío.</p>
-				
-				<p>Escribo bajo el seudónimo de <strong>Ágatha Gatillo</strong>. Ahí me permito torcer un poco el lenguaje, correrme de lo esperado, experimentar sin necesidad de hacerlo “bien”.</p>
-				
-				<p>Este proyecto nace de ese lugar. De mis ganas de armar un espacio donde leer, escribir y jugar se mezclen. Donde no haya que acertar, ni tener experiencia, ni saber por dónde empezar.</p>
-				
-				<p>Me interesa lo intergeneracional, lo que aparece en el entre, lo que se construye con otrxs. Probar, equivocarse, insistir, reírse, volver a intentar.</p>
-				
-				<blockquote class="bio-highlight">
-					Un espacio habitable. Para quedarse un rato. Y ver qué pasa con las palabras cuando se las deja un poco en libertad.
-				</blockquote>
-			</div>
-		</div>
-	</section>
+  <section id="propuesta">
+    <span class="section-label">01 · Propuesta</span>
+    
+    <div class="bio-container">
+      <p class="bio-intro">Hola, ¿cómo estás? Me presento y te cuento: soy Agustina</p>
+      <div class="bio-content">
+        <p>Leo desde los cinco años, cuando empecé a perderme —y a encontrarme— entre libros. Desde entonces, sigo ahí: leyendo, escribiendo, subrayando, volviendo.</p>
+        
+        <p>Soy profesora de nivel inicial y me formé en literatura infantil y juvenil, didáctica y pedagogía. Pero lo que más me interesa es lo que pasa cuando las palabras se aflojan: cuando dejan de ser consigna y se vuelven juego, prueba, desvío.</p>
+        
+        <p>Escribo bajo el seudónimo de <strong>Ágatha Gatillo</strong>. Ahí me permito torcer un poco el lenguaje, correrme de lo esperado, experimentar sin necesidad de hacerlo “bien”.</p>
+        
+        <p>Este proyecto nace de ese lugar. De mis ganas de armar un espacio donde leer, escribir y jugar se mezclen. Donde no haya que acertar, ni tener experiencia, ni saber por dónde empezar.</p>
+        
+        <p>Me interesa lo intergeneracional, lo que aparece en el entre, lo que se construye con otrxs. Probar, equivocarse, insistir, reírse, volver a intentar.</p>
+        
+        <blockquote class="bio-highlight">
+          Un espacio habitable. Para quedarse un rato. Y ver qué pasa con las palabras cuando se las deja un poco en libertad.
+        </blockquote>
+      </div>
+    </div>
+  </section>
 
-	<script>
-		// Script para el menú móvil de la home
-		const menuCb = document.getElementById('menu-cb-home') as HTMLInputElement | null;
-		if (menuCb) {
-			document.querySelectorAll('.nav-list a').forEach(link => {
-				link.addEventListener('click', () => { menuCb.checked = false; });
-			});
-		}
-	</script>
+  <section id="registros">
+    <span class="section-label">02 · Registros</span>
+    <h2>Momentos de encuentro</h2>
+    <div class="galeria-grid" id="galeria-encuentros">
+      {photos.length > 0 ? (
+        photos.map(photo => (
+          <div class="foto-item">
+            <img src={`/photos/${photo}`} alt={`Registro fotográfico - ${photo}`} loading="lazy" />
+          </div>
+        ))
+      ) : (
+        <>
+          <div class="foto-item"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80" alt="Alguien escribiendo a pluma sobre papel artesanal" loading="lazy"></div>
+          <div class="foto-item"><img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80" alt="Libros antiguos abiertos sobre una mesa de madera" loading="lazy"></div>
+          <div class="foto-item"><img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=800&q=80" alt="Persona leyendo un libro en un ambiente cálido" loading="lazy"></div>
+          <div class="foto-item"><img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80" alt="Mesa de taller con libros y mate" loading="lazy"></div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <span class="section-label">03 · Dudas</span>
+    <h2>Preguntas frecuentes</h2>
+    <div class="faq-container">
+      {dudas.map((duda) => (
+        <details class="faq-item" name="faq">
+          <summary>
+            <span class="faq-pregunta">{duda.data.pregunta}</span>
+            <div class="faq-icon"></div>
+          </summary>
+          <p class="faq-respuesta" set:html={duda.body}></p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section id="encuentros">
+    <span class="section-label">04 · Encuentros</span>
+    <h2>Dónde nos juntamos</h2>
+    <div class="grid-sedes">
+      {encuentros.map(enc => (
+        <article class="card">
+          <div class="map-container">
+            <iframe src={enc.data.map_iframe} width="100%" height="250" style="border:0; border-radius: 4px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <h3>{enc.data.nombre}</h3>
+          <ul class="card-data" aria-label={`Información de ${enc.data.nombre}`}>
+            <li>{enc.data.dia}</li>
+            <li>{enc.data.horario}</li>
+            <li>{enc.data.direccion}</li>
+            <li><a href={enc.data.instagram_url} target="_blank" class="sede-instagram">{enc.data.instagram_user}</a></li>
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <article class="card-destacada">
+      <h3>Inscripción y Aranceles</h3>
+      <p class="arancel-texto">
+        <strong>$10.000 por encuentro</strong>
+        <span class="arancel-aclaracion">(incluye todos los materiales + un recuerdo del evento)</span>
+      </p>
+      <a href="https://forms.gle/thogYscac6xLTfNZ7" target="_blank" class="btn-inscripcion">Formulario de inscripción</a>
+    </article>
+  </section>
+
+  <section id="comunidad" style="overflow-x: hidden;">
+    <span class="section-label">05 · Comunidad</span>
+    <h2>Lo que dicen</h2>
+    <div class="resenas-container" aria-live="polite">
+      <div class="resenas-track">
+        {comunidadEntries.map(resena => (
+          <div class="resena-card">
+            <p class="resena-texto" set:html={resena.body}></p>
+            <span class="resena-autor">{resena.data.autor}</span>
+          </div>
+        ))}
+        <!-- Duplicados para scroll infinito -->
+        {comunidadEntries.map(resena => (
+          <div class="resena-card">
+            <p class="resena-texto" set:html={resena.body}></p>
+            <span class="resena-autor">{resena.data.autor}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div id="visualizador" class="visualizador" role="dialog" aria-modal="true" aria-label="Visualizador de imagen"><span class="cerrar" title="Cerrar">&times;</span><img id="img-full" src="" alt="Imagen ampliada"></div>
+
+  <script>
+    // --- LÓGICA DE NAVEGACIÓN (IntersectionObserver) ---
+    const hero = document.getElementById('main-hero');
+    const placeholder = document.querySelector('.hero-placeholder');
+
+    if (hero && placeholder) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            hero.classList.add('compacto');
+          } else {
+            hero.classList.remove('compacto');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(placeholder);
+    }
+
+    // --- LÓGICA DE GALERÍA (Delegación de Eventos) ---
+    const galeria = document.getElementById('galeria-encuentros');
+    const visor = document.getElementById('visualizador');
+    const imgFull = document.getElementById('img-full') as HTMLImageElement | null;
+
+    if (galeria && visor && imgFull) {
+      galeria.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const item = target.closest('.foto-item');
+        if (!item) return;
+        const img = item.querySelector('img');
+        if (img) {
+          imgFull.src = img.src;
+          imgFull.alt = img.alt || 'Momento de encuentro';
+          visor.classList.add('activo');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+
+      const cerrarVisor = () => {
+        visor.classList.remove('activo');
+        document.body.style.overflow = '';
+      };
+
+      visor.addEventListener('click', (e) => {
+        if (e.target === visor || (e.target as HTMLElement).closest('.cerrar')) cerrarVisor();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') cerrarVisor();
+      });
+    }
+
+    // --- MENÚ MÓVIL (Sincronización) ---
+    const menuCb = document.getElementById('menu-cb') as HTMLInputElement | null;
+    if (menuCb) {
+      document.querySelectorAll('.nav-list a').forEach(link => {
+        link.addEventListener('click', () => { menuCb.checked = false; });
+      });
+    }
+  </script>
+
 </Layout>
