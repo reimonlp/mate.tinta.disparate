@@ -204,8 +204,8 @@ if (fs.existsSync(photosDir)) {
         }
       });
     }, { 
-      threshold: 0.5, // Se activa cuando el 50% de la sección es visible
-      rootMargin: '-10% 0px -40% 0px' // Ajuste para que se sienta más natural al bajar
+      threshold: 0.2, // Bajamos el umbral para que se active más fácil
+      rootMargin: '-20% 0px -20% 0px' // Centramos más el área de detección
     });
 
     sections.forEach(section => hashObserver.observe(section));
