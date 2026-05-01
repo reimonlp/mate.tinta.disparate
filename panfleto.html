@@ -55,59 +55,73 @@
     .middle-section {
         display: flex;
         flex-direction: column;
-        gap: 15px; /* Separación entre las líneas */
-        font-family: 'Playfair Display', serif;
-        font-size: 22px;
-        font-weight: 800;
-        font-style: italic;
-        margin: 15px 0;
+        gap: 12px;
+        margin: 20px 0;
     }
-    .linea-1 { text-align: left; }
-    .linea-2 { text-align: center; }
-    .linea-3 { text-align: right; }
+    .frase-container {
+        display: flex;
+        align-items: center;
+    }
+    .frase {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        font-weight: 800;
+        padding: 6px 12px;
+        border-radius: 2px;
+    }
+    .linea-1 { justify-content: flex-start; }
+    .linea-1 .frase { background-color: #000; color: #fff; transform: rotate(-1deg); }
+    
+    .linea-2 { justify-content: center; }
+    .linea-2 .frase { border: 2px solid #000; color: #000; transform: rotate(1deg); }
+    
+    .linea-3 { justify-content: flex-end; }
+    .linea-3 .frase { background-color: #000; color: #fff; transform: rotate(-0.5deg); }
 
     /* SECCIÓN INFERIOR: Info, Instagram y QR */
     .footer-section {
         display: flex;
         justify-content: space-between;
-        align-items: stretch; /* Para que el QR y el texto compartan el alto */
-        border-top: 3px solid #000; /* Línea separadora */
-        padding-top: 6px;
+        align-items: stretch;
+        border-top: 3px solid #000;
+        padding-top: 10px;
     }
     .info-container {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 60%;
+        width: 65%;
     }
     .info-text {
-        font-size: 10px;
-        line-height: 1.3;
+        font-size: 13px; /* Aumentado de 10px */
+        line-height: 1.4;
     }
     .info-text .subtitulo {
-        font-weight: 800;
-        font-size: 11px;
-        margin-bottom: 3px;
+        font-weight: 900;
+        font-size: 15px; /* Aumentado de 11px */
+        margin-bottom: 6px;
         display: block;
         font-family: 'Playfair Display', serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     .info-text p {
-        margin-bottom: 4px;
+        margin-bottom: 8px;
     }
     .handler-ig {
-        font-weight: bold;
-        font-size: 12px;
-        margin-top: 5px;
+        font-weight: 800;
+        font-size: 14px;
+        margin-top: 10px;
     }
     .qr-container {
-        width: 35%; /* Ocupa el resto del espacio */
+        width: 30%;
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
     }
     .qr-container img {
         width: 100%;
-        max-width: 35mm; /* Para que no sea gigante */
+        max-width: 32mm;
         height: auto;
         object-fit: contain;
     }
@@ -125,9 +139,9 @@
 
         <!-- TEXTOS DE LLAMADA A LA ACCIÓN -->
         <div class="middle-section">
-            <div class="linea-1">VENÍ A PROBAR</div>
-            <div class="linea-2">VENÍ A INVENTAR</div>
-            <div class="linea-3">VENÍ A DESORDENAR</div>
+            <div class="frase-container linea-1"><span class="frase">VENÍ A PROBAR</span></div>
+            <div class="frase-container linea-2"><span class="frase">VENÍ A INVENTAR</span></div>
+            <div class="frase-container linea-3"><span class="frase">VENÍ A DESORDENAR</span></div>
         </div>
 
         <!-- PIE DE PÁGINA -->
