@@ -24,11 +24,41 @@
         flex-direction: column;
         justify-content: space-between;
         border: 1px dashed #cccccc; /* Línea guía para recortar (opcional) */
+        position: relative; /* Para las decoraciones */
+        overflow: hidden;
     }
+
+    /* DECORACIONES PARATEXTUALES */
+    .decoracion {
+        position: absolute;
+        z-index: 0;
+        opacity: 0.1; /* Muy sutil */
+        pointer-events: none;
+    }
+    .decor-mate { width: 30mm; top: 105mm; left: -5mm; transform: rotate(-15deg); }
+    .decor-libros { width: 35mm; top: 55mm; right: -10mm; transform: rotate(10deg); }
+    .decor-mancha { width: 40mm; top: -10mm; left: -15mm; }
+    .decor-garabato { width: 25mm; bottom: 45mm; right: 5mm; }
 
     /* SECCIÓN SUPERIOR: Volanta y Título */
     .header-section {
         text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+    .logo-flyer {
+        width: 20mm;
+        height: 20mm;
+        border-radius: 50%;
+        border: 1.5px solid #000;
+        margin: 0 auto 10px;
+        overflow: hidden;
+    }
+    .logo-flyer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(1);
     }
     .volanta {
         font-size: 9px;
@@ -39,7 +69,7 @@
     }
     .titulo {
         font-family: 'Playfair Display', serif;
-        font-size: 34px;
+        font-size: 30px;
         font-weight: 900;
         line-height: 0.95;
         text-transform: uppercase;
@@ -57,6 +87,8 @@
         flex-direction: column;
         gap: 12px;
         margin: 20px 0;
+        position: relative;
+        z-index: 1;
     }
     .frase-container {
         display: flex;
@@ -85,6 +117,8 @@
         align-items: stretch;
         border-top: 3px solid #000;
         padding-top: 10px;
+        position: relative;
+        z-index: 1;
     }
     .info-container {
         display: flex;
@@ -130,9 +164,36 @@
 <body>
 
     <div class="a6-flyer">
+
+        <!-- DECORACIONES SVG -->
+        <div class="decoracion decor-mancha">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,50 Q10,20 40,30 T70,50 T40,80 Z" fill="black" />
+            </svg>
+        </div>
+        <div class="decoracion decor-mate">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M35 60 Q 35 85 50 85 Q 65 85 65 60 Q 65 45 50 45 Q 35 45 35 60" fill="none" stroke="black" stroke-width="3"/>
+                <path d="M55 45 L 65 15" stroke="black" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="decoracion decor-libros">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="30" width="35" height="45" fill="none" stroke="black" stroke-width="3" transform="rotate(-10 37 52)"/>
+                <rect x="45" y="25" width="35" height="45" fill="none" stroke="black" stroke-width="3" transform="rotate(5 62 47)"/>
+            </svg>
+        </div>
+        <div class="decoracion decor-garabato">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10,10 C20,40 40,0 50,30 S80,60 90,40" fill="none" stroke="black" stroke-width="2" stroke-dasharray="4 2"/>
+            </svg>
+        </div>
         
         <!-- ENCABEZADO -->
         <div class="header-section">
+            <div class="logo-flyer">
+                <img src="logo.jpeg" alt="Logo">
+            </div>
             <div class="volanta">Club de Lectura y Escritura Creativa para TODAS las Edades</div>
             <h1 class="titulo">Mate, Tinta<br>y <em>Disparate</em></h1>
         </div>
