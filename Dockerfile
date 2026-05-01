@@ -10,7 +10,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Exponer el puerto por defecto de Astro SSR
-EXPOSE 4321
+EXPOSE 80
 
 # Configurar el punto de entrada
 ENTRYPOINT ["/entrypoint.sh"]

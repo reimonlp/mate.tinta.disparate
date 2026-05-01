@@ -17,7 +17,7 @@ npm run build
 
 # Iniciar el servidor de Node.js en background
 echo "Iniciando servidor Node.js..."
-HOST=0.0.0.0 PORT=4321 node ./dist/server/entry.mjs &
+HOST=0.0.0.0 PORT=80 node ./dist/server/entry.mjs &
 NODE_PID=$!
 
 # Bucle infinito para sincronización con Git
@@ -42,7 +42,7 @@ while true; do
     echo "Reiniciando servidor Node.js..."
     kill $NODE_PID
     sleep 2
-    HOST=0.0.0.0 PORT=4321 node ./dist/server/entry.mjs &
+    HOST=0.0.0.0 PORT=80 node ./dist/server/entry.mjs &
     NODE_PID=$!
   fi
   
