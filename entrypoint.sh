@@ -2,6 +2,9 @@
 
 echo "Starting Mate Tinta Disparate sync loop..."
 
+# Evitar errores de Git sobre propiedad de archivos (montajes de Docker)
+git config --global --add safe.directory /app
+
 # Instalar dependencias si no existen o han cambiado
 if [ ! -d "node_modules" ]; then
   echo "Instalando dependencias iniciales..."
