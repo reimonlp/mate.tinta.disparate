@@ -12,6 +12,8 @@ services:
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
+    environment:
+      - DOCKER_API_VERSION=1.40
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     # Revisa actualizaciones de 'mate-tinta-disparate' cada 300 segundos (5 minutos)
