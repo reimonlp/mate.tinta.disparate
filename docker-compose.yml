@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   web:
     # Ahora descargamos la imagen construida por GitHub Actions
@@ -7,13 +5,19 @@ services:
     ports:
       - "8080:80"
     restart: unless-stopped
-    container_name: mate-tinta-prod
+    container_name: mate-tinta-disparate
+    networks:
+      - proxy-network
 
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    # Revisa actualizaciones de 'mate-tinta-prod' cada 300 segundos (5 minutos)
-    command: --interval 300 mate-tinta-prod
+    # Revisa actualizaciones de 'mate-tinta-disparate' cada 300 segundos (5 minutos)
+    command: --interval 300 mate-tinta-disparate
     restart: unless-stopped
+
+networks:
+  proxy-network:
+    external: true
