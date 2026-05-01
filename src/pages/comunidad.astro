@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const comunidadEntries = await getCollection('comunidad');
+---
+
+<Layout title="Comunidad - Mate, Tinta y Disparate">
+	<section id="comunidad" style="overflow-x: hidden; padding-top: 6rem;">
+		<span class="section-label">05 · Comunidad</span>
+		<h2>Lo que dicen</h2>
+		<div class="resenas-container" aria-live="polite">
+			<div class="resenas-track">
+				{comunidadEntries.map(resena => (
+					<div class="resena-card">
+						<p class="resena-texto" set:html={resena.body}></p>
+						<span class="resena-autor">{resena.data.autor}</span>
+					</div>
+				))}
+				<!-- Duplicados para scroll infinito -->
+				{comunidadEntries.map(resena => (
+					<div class="resena-card">
+						<p class="resena-texto" set:html={resena.body}></p>
+						<span class="resena-autor">{resena.data.autor}</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>

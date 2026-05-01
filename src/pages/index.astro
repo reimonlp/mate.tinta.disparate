@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mate, Tinta y Disparate — Encuentros de Lectura y Escritura">
+	<style>
+		/* Estilo específico para ocultar el header compacto en la home y mostrar el hero grande */
+		:global(.compacto-multipagina) {
+			display: none; /* Ocultamos el header del layout por defecto en la home, ya que la home tiene su propio Hero */
+		}
+	</style>
+
+	<div class="hero-placeholder">
+		<header id="main-hero" class="hero">
+			<div class="hero-branding">
+				<div class="logo-container">
+					<img src="/logo.jpeg" alt="Logo circular de Mate, Tinta y Disparate">
+				</div>
+				<div class="hero-title">
+					<h1 class="display-font">Mate, Tinta<br><em>y Disparate</em></h1>
+				</div>
+			</div>
+			
+			<input type="checkbox" id="menu-cb-home" class="menu-cb">
+			<label for="menu-cb-home" class="menu-overlay" aria-hidden="true"></label>
+			<label for="menu-cb-home" class="menu-toggle" aria-label="Abrir menú de navegación">
+				<span></span><span></span><span></span>
+			</label>
+
+			<nav id="hero-nav" class="hero-nav" aria-label="Menú principal">
+				<ul class="nav-list">
+					<li><a href="/propuesta">Propuesta</a></li>
+					<li><a href="/registros">Registros</a></li>
+					<li><a href="/dudas">Dudas</a></li>
+					<li><a href="/encuentros">Encuentros</a></li>
+					<li><a href="/comunidad">Comunidad</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+
+	<section id="propuesta" style="padding-top: 4rem;">
+		<span class="section-label">01 · Propuesta</span>
+		
+		<div class="bio-container">
+			<p class="bio-intro">Hola, ¿cómo estás? Me presento y te cuento: soy Agustina</p>
+			<div class="bio-content">
+				<p>Leo desde los cinco años, cuando empecé a perderme —y a encontrarme— entre libros. Desde entonces, sigo ahí: leyendo, escribiendo, subrayando, volviendo.</p>
+				
+				<p>Soy profesora de nivel inicial y me formé en literatura infantil y juvenil, didáctica y pedagogía. Pero lo que más me interesa es lo que pasa cuando las palabras se aflojan: cuando dejan de ser consigna y se vuelven juego, prueba, desvío.</p>
+				
+				<p>Este proyecto nace de ese lugar. De mis ganas de armar un espacio donde leer, escribir y jugar se mezclen. Donde no haya que acertar, ni tener experiencia, ni saber por dónde empezar.</p>
+				
+				<div style="text-align: center; margin-top: 2rem;">
+					<a href="/propuesta" class="btn-inscripcion" style="display: inline-block; padding: 1rem 2rem;">Leer más sobre la propuesta</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		// Script para el menú móvil de la home
+		const menuCb = document.getElementById('menu-cb-home') as HTMLInputElement | null;
+		if (menuCb) {
+			document.querySelectorAll('.nav-list a').forEach(link => {
+				link.addEventListener('click', () => { menuCb.checked = false; });
+			});
+		}
+	</script>
+</Layout>

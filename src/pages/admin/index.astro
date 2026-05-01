@@ -1,0 +1,89 @@
+---
+import '../../styles/global.css';
+---
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Panel de Administración</title>
+	<style>
+		body {
+			margin: 0;
+			font-family: 'DM Sans', sans-serif;
+			display: flex;
+			height: 100vh;
+			background-color: #f9f9f9;
+		}
+		.sidebar {
+			width: 250px;
+			background-color: #1a1a1a;
+			color: #fff;
+			display: flex;
+			flex-direction: column;
+		}
+		.sidebar-header {
+			padding: 2rem 1rem;
+			text-align: center;
+			border-bottom: 1px solid #333;
+		}
+		.sidebar-nav {
+			flex: 1;
+			padding: 1rem 0;
+		}
+		.sidebar-nav a {
+			display: block;
+			padding: 1rem 1.5rem;
+			color: #ccc;
+			text-decoration: none;
+			transition: background-color 0.2s, color 0.2s;
+		}
+		.sidebar-nav a:hover, .sidebar-nav a.active {
+			background-color: #333;
+			color: #fff;
+		}
+		.main-content {
+			flex: 1;
+			padding: 2rem;
+			overflow-y: auto;
+		}
+		.card {
+			background: #fff;
+			padding: 1.5rem;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+			margin-bottom: 1rem;
+		}
+	</style>
+</head>
+<body>
+	<aside class="sidebar">
+		<div class="sidebar-header">
+			<h3>Admin Panel</h3>
+			<p style="font-size: 0.8rem; color: #888;">Mate, Tinta y Disparate</p>
+		</div>
+		<nav class="sidebar-nav">
+			<a href="/admin" class="active">Dashboard</a>
+			<a href="#">Galería</a>
+			<a href="#">Comunidad</a>
+			<a href="#">Dudas (FAQ)</a>
+			<a href="#">Encuentros</a>
+			<a href="/cloud" style="color: #ff9f43; border-top: 1px solid #333; margin-top: 1rem; padding-top: 1.5rem;">☁️ Archivos Cloud</a>
+			<a href="/" style="border-top: 1px solid #333; margin-top: 1rem; padding-top: 1.5rem;">← Volver al sitio</a>
+		</nav>
+	</aside>
+
+	<main class="main-content">
+		<header style="margin-bottom: 2rem;">
+			<h1 style="margin: 0; font-family: 'DM Serif Display', serif;">Bienvenida al panel</h1>
+			<p style="color: #666;">Selecciona una opción en el menú lateral para gestionar el contenido.</p>
+		</header>
+
+		<div class="card">
+			<h2>Resumen</h2>
+			<p>Este panel es un boceto para la futura administración de contenidos. Desde aquí podrás subir fotos, editar reseñas y gestionar las fechas de los encuentros.</p>
+			<p><strong>Nota:</strong> El sistema de Archivos Cloud estará disponible próximamente.</p>
+		</div>
+	</main>
+</body>
+</html>

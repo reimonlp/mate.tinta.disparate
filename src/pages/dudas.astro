@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const dudasEntries = await getCollection('dudas');
+const dudas = dudasEntries.sort((a, b) => a.data.orden - b.data.orden);
+---
+
+<Layout title="Dudas - Mate, Tinta y Disparate">
+	<section id="preguntas" style="padding-top: 6rem;">
+		<span class="section-label">03 · Dudas</span>
+		<h2>Preguntas frecuentes</h2>
+		<div class="faq-container">
+			{dudas.map((duda) => (
+				<details class="faq-item" name="faq">
+					<summary>
+						<span class="faq-pregunta">{duda.data.pregunta}</span>
+						<div class="faq-icon"></div>
+					</summary>
+					<p class="faq-respuesta" set:html={duda.body}></p>
+				</details>
+			))}
+		</div>
+	</section>
+</Layout>
