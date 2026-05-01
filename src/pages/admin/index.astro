@@ -25,9 +25,15 @@ const stats = [
 ---
 
 <AdminLayout title="Dashboard">
-  <header>
-    <h1 class="page-title">Resumen del Sitio</h1>
-    <p class="page-description">Aquí podés ver un pantallazo rápido del contenido publicado en tu web.</p>
+  <header style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+    <div>
+      <h1 class="page-title">Resumen del Sitio</h1>
+      <p class="page-description">Aquí podés ver un pantallazo rápido del contenido publicado en tu web.</p>
+    </div>
+    <button id="btn-config-token" class="action-btn" style="padding: 0.5rem 1rem; flex-direction: row; font-size: 0.85rem; border-color: transparent; background: #e5e7eb;">
+      <svg viewBox="0 0 24 24" style="width:16px; height:16px;" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      Configurar GitHub Token
+    </button>
   </header>
 
   <!-- Métricas -->
@@ -47,126 +53,277 @@ const stats = [
   <div class="quick-actions">
     <h2>Acciones Rápidas</h2>
     <div class="actions-grid">
-      <button class="action-btn" onclick="alert('Esta función estará disponible próximamente.')">
+      <button class="action-btn" id="btn-add-photo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
         Subir Foto Nueva
       </button>
-      <button class="action-btn" onclick="alert('Esta función estará disponible próximamente.')">
+      <button class="action-btn" id="btn-add-review">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
         Añadir Reseña
-      </button>
-      <button class="action-btn" onclick="alert('Esta función estará disponible próximamente.')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-        Actualizar Fechas
       </button>
     </div>
   </div>
 
+  <!-- Modal: Token -->
+  <div class="modal-overlay" id="modal-token">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar">✖</button>
+      <h2 class="modal-title">Autenticación GitHub</h2>
+      <p style="margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--admin-text-muted);">
+        Para administrar la web en vivo, necesitás un <strong>Personal Access Token (Clásico)</strong> de GitHub con el permiso <code>repo</code> marcado. 
+        <a href="https://github.com/settings/tokens/new?scopes=repo&description=MateTintaDisparate_CMS" target="_blank" style="color: var(--admin-primary); font-weight: bold;">Generalo acá</a>.
+      </p>
+      <div class="form-group">
+        <label>Tu Token de GitHub</label>
+        <input type="password" id="github-token-input" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      </div>
+      <button class="btn-primary" id="save-token-btn">Guardar Token</button>
+    </div>
+  </div>
+
+  <!-- Modal: Subir Foto -->
+  <div class="modal-overlay" id="modal-photo">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar">✖</button>
+      <h2 class="modal-title">Subir a Galería</h2>
+      <div class="form-group">
+        <label>Elegir Imagen (JPG/PNG/WEBP)</label>
+        <input type="file" id="photo-input" class="form-control" accept="image/jpeg, image/png, image/webp">
+      </div>
+      <button class="btn-primary" id="submit-photo-btn">Subir Imagen</button>
+    </div>
+  </div>
+
+  <!-- Modal: Añadir Reseña -->
+  <div class="modal-overlay" id="modal-review">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar">✖</button>
+      <h2 class="modal-title">Nueva Reseña</h2>
+      <div class="form-group">
+        <label>Autor / Edad (Ej: ✦ María, 42 años)</label>
+        <input type="text" id="review-author" class="form-control" placeholder="✦ Nombre, Edad">
+      </div>
+      <div class="form-group">
+        <label>Texto de la reseña</label>
+        <textarea id="review-text" class="form-control" rows="4" placeholder='"Excelente experiencia..."'></textarea>
+      </div>
+      <button class="btn-primary" id="submit-review-btn">Publicar Reseña</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    <span id="toast-msg">Mensaje</span>
+  </div>
+
   <style>
-    /* Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .stat-card {
-      background-color: var(--admin-surface);
-      border-radius: 12px;
-      padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-      border: 1px solid var(--admin-border);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
-    }
-
-    .stat-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .stat-icon :global(svg) {
-      width: 24px;
-      height: 24px;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-    }
-
-    .stat-info h3 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--admin-text);
-      line-height: 1.2;
-    }
-
-    .stat-info p {
-      font-size: 0.9rem;
-      color: var(--admin-text-muted);
-      margin: 0;
-    }
-
-    /* Quick Actions */
-    .quick-actions h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      color: var(--admin-text);
-      margin-bottom: 1.5rem;
-    }
-
-    .actions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    .action-btn {
-      background-color: var(--admin-surface);
-      border: 1px dashed var(--admin-border);
-      padding: 1.2rem;
-      border-radius: 10px;
-      color: var(--admin-text);
-      font-size: 0.95rem;
-      font-weight: 500;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-    }
-
-    .action-btn svg {
-      width: 24px;
-      height: 24px;
-      color: var(--admin-primary);
-      transition: transform 0.2s ease;
-    }
-
-    .action-btn:hover {
-      border-color: var(--admin-primary);
-      color: var(--admin-primary);
-      background-color: #f9fafb;
-    }
-
-    .action-btn:hover svg {
-      transform: scale(1.1);
-    }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    .stat-card { background-color: var(--admin-surface); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); border: 1px solid var(--admin-border); transition: transform 0.2s, box-shadow 0.2s; }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025); }
+    .stat-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .stat-icon :global(svg) { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .stat-info h3 { font-size: 1.8rem; font-weight: 700; color: var(--admin-text); line-height: 1.2; }
+    .stat-info p { font-size: 0.9rem; color: var(--admin-text-muted); margin: 0; }
+    .quick-actions h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--admin-text); margin-bottom: 1.5rem; }
+    .actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .action-btn { background-color: var(--admin-surface); border: 1px dashed var(--admin-border); padding: 1.2rem; border-radius: 10px; color: var(--admin-text); font-size: 0.95rem; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; transition: all 0.2s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+    .action-btn svg { width: 24px; height: 24px; color: var(--admin-primary); transition: transform 0.2s ease; }
+    .action-btn:hover { border-color: var(--admin-primary); color: var(--admin-primary); background-color: #f9fafb; }
+    .action-btn:hover svg { transform: scale(1.1); }
   </style>
+
+  <script>
+    // Configuración Base
+    const REPO = 'reimonlp/mate.tinta.disparate';
+    const BRANCH = 'main';
+    
+    // Elementos del DOM
+    const btnConfigToken = document.getElementById('btn-config-token');
+    const modalToken = document.getElementById('modal-token');
+    const inputToken = document.getElementById('github-token-input') as HTMLInputElement;
+    const btnSaveToken = document.getElementById('save-token-btn');
+
+    const btnAddPhoto = document.getElementById('btn-add-photo');
+    const modalPhoto = document.getElementById('modal-photo');
+    const inputPhoto = document.getElementById('photo-input') as HTMLInputElement;
+    const btnSubmitPhoto = document.getElementById('submit-photo-btn') as HTMLButtonElement;
+
+    const btnAddReview = document.getElementById('btn-add-review');
+    const modalReview = document.getElementById('modal-review');
+    const inputReviewAuthor = document.getElementById('review-author') as HTMLInputElement;
+    const inputReviewText = document.getElementById('review-text') as HTMLTextAreaElement;
+    const btnSubmitReview = document.getElementById('submit-review-btn') as HTMLButtonElement;
+
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+
+    // Utilidades UI
+    function showToast(msg: string, isError = false) {
+      if(toast && toastMsg) {
+        toastMsg.innerText = msg;
+        toast.className = 'toast show ' + (isError ? 'error' : '');
+        setTimeout(() => toast.classList.remove('show'), 5000);
+      }
+    }
+
+    function openModal(modal: HTMLElement | null) {
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeModal(modal: HTMLElement | null) {
+      if (modal) modal.classList.remove('active');
+    }
+
+    // Configurar modales (Cerrar)
+    document.querySelectorAll('.modal-close').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        closeModal((e.target as HTMLElement).closest('.modal-overlay'));
+      });
+    });
+
+    // Validar Token Helper
+    function getGHHeaders() {
+      const token = localStorage.getItem('gh_token');
+      if (!token) {
+        openModal(modalToken);
+        throw new Error('No hay token');
+      }
+      return {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      };
+    }
+
+    // API Call a GitHub para crear archivos
+    async function commitFileToGitHub(path: string, message: string, contentBase64: string) {
+      const url = `https://api.github.com/repos/${REPO}/contents/${path}`;
+      const body = {
+        message: message,
+        content: contentBase64,
+        branch: BRANCH
+      };
+
+      const res = await fetch(url, {
+        method: 'PUT',
+        headers: getGHHeaders(),
+        body: JSON.stringify(body)
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.message || 'Error al guardar en GitHub');
+      }
+      return res.json();
+    }
+
+    // 1. Lógica Token
+    if (btnConfigToken && modalToken && btnSaveToken) {
+      btnConfigToken.addEventListener('click', () => {
+        if(inputToken) inputToken.value = localStorage.getItem('gh_token') || '';
+        openModal(modalToken);
+      });
+
+      btnSaveToken.addEventListener('click', () => {
+        const token = inputToken?.value.trim();
+        if (token) {
+          localStorage.setItem('gh_token', token);
+          showToast('Token guardado correctamente');
+          closeModal(modalToken);
+        }
+      });
+    }
+
+    // 2. Lógica Subir Foto
+    if (btnAddPhoto && modalPhoto && btnSubmitPhoto && inputPhoto) {
+      btnAddPhoto.addEventListener('click', () => {
+        if (!localStorage.getItem('gh_token')) { openModal(modalToken); return; }
+        openModal(modalPhoto);
+      });
+
+      btnSubmitPhoto.addEventListener('click', async () => {
+        const file = inputPhoto.files?.[0];
+        if (!file) return showToast('Seleccioná una imagen', true);
+
+        btnSubmitPhoto.disabled = true;
+        btnSubmitPhoto.innerText = 'Subiendo...';
+
+        try {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = async () => {
+            try {
+              // Limpiar metadata "data:image/jpeg;base64," del string
+              const base64Content = (reader.result as string).split(',')[1];
+              const datePrefix = new Date().toISOString().split('T')[0];
+              const safeName = file.name.replace(/[^a-zA-Z0-9.]/g, '-').toLowerCase();
+              const fileName = `${datePrefix}-${safeName}`;
+              const path = `public/photos/${fileName}`;
+
+              await commitFileToGitHub(path, `content: agregar foto ${fileName} a la galería`, base64Content);
+              
+              showToast('¡Foto subida! La web se actualizará en 30s');
+              closeModal(modalPhoto);
+              inputPhoto.value = '';
+            } catch (err: any) {
+              showToast(err.message, true);
+            } finally {
+              btnSubmitPhoto.disabled = false;
+              btnSubmitPhoto.innerText = 'Subir Imagen';
+            }
+          };
+        } catch (err: any) {
+          showToast('Error leyendo archivo', true);
+          btnSubmitPhoto.disabled = false;
+          btnSubmitPhoto.innerText = 'Subir Imagen';
+        }
+      });
+    }
+
+    // 3. Lógica Añadir Reseña
+    if (btnAddReview && modalReview && btnSubmitReview && inputReviewAuthor && inputReviewText) {
+      btnAddReview.addEventListener('click', () => {
+        if (!localStorage.getItem('gh_token')) { openModal(modalToken); return; }
+        openModal(modalReview);
+      });
+
+      btnSubmitReview.addEventListener('click', async () => {
+        const author = inputReviewAuthor.value.trim();
+        const text = inputReviewText.value.trim();
+
+        if (!author || !text) return showToast('Completá ambos campos', true);
+
+        btnSubmitReview.disabled = true;
+        btnSubmitReview.innerText = 'Guardando...';
+
+        try {
+          // Generar Markdown: 
+          // ---
+          // autor: ...
+          // ---
+          // "texto"
+          const markdownContent = `---\nautor: ${author}\n---\n"${text}"`;
+          // Convertir UTF-8 string a Base64 sin romper caracteres latinos (áéíóú)
+          const base64Content = btoa(unescape(encodeURIComponent(markdownContent)));
+          
+          const safeName = author.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase().substring(0, 20);
+          const timestamp = Date.now();
+          const path = `src/content/comunidad/${safeName}-${timestamp}.md`;
+
+          await commitFileToGitHub(path, `content: añadir reseña de ${author}`, base64Content);
+          
+          showToast('¡Reseña añadida! La web se actualizará en 30s');
+          closeModal(modalReview);
+          inputReviewAuthor.value = '';
+          inputReviewText.value = '';
+        } catch (err: any) {
+          showToast(err.message, true);
+        } finally {
+          btnSubmitReview.disabled = false;
+          btnSubmitReview.innerText = 'Publicar Reseña';
+        }
+      });
+    }
+  </script>
 </AdminLayout>
