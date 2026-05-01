@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:4321"
+      - "8080:80"
     restart: unless-stopped
     container_name: mate-tinta-disparate
     networks:
