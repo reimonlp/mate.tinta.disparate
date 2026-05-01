@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mate, Tinta y Disparate — Todos los slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+ :root {
+   --crema: #F0EBD8;
+   --verde: #2D4A2D;
+   --mostaza: #C9922A;
+   --texto: #1A2E1A;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+   background: #1a1a1a;
+   font-family: 'DM Sans', sans-serif;
+   color: var(--texto);
+ }
+
+ /* ===== NAVEGACIÓN ===== */
+ .nav-global {
+   position: fixed;
+   top: 0; left: 0; right: 0;
+   background: #111;
+   z-index: 1000;
+   padding: 0 32px;
+   display: flex;
+   align-items: stretch;
+   height: 52px;
+   border-bottom: 1px solid #333;
+   gap: 4px;
+   overflow-x: auto;
+ }
+
+ .nav-global::-webkit-scrollbar { height: 3px; }
+ .nav-global::-webkit-scrollbar-thumb { background: var(--mostaza); }
+
+ .nav-btn {
+   display: flex;
+   align-items: center;
+   padding: 0 16px;
+   font-size: 11px;
+   letter-spacing: 2px;
+   text-transform: uppercase;
+   color: rgba(255,255,255,0.7);
+   white-space: nowrap;
+   cursor: pointer;
+   border-bottom: 2px solid transparent;
+   transition: all 0.2s;
+   text-decoration: none;
+   font-family: 'DM Sans', sans-serif;
+   font-weight: 500;
+ }
+
+ .nav-btn:hover { color: white; border-bottom-color: var(--mostaza); }
+ .nav-btn.activo { color: var(--mostaza); border-bottom-color: var(--mostaza); }
+
+ .nav-marca {
+   display: flex;
+   align-items: center;
+   font-family: 'Playfair Display', serif;
+   font-size: 14px;
+   font-weight: 700;
+   color: white;
+   margin-right: 24px;
+   padding-right: 24px;
+   border-right: 1px solid #333;
+   white-space: nowrap;
+ }
+
+ .nav-marca em { color: var(--mostaza); font-style: italic; }
+
+ /* ===== SECCIONES ===== */
+ .seccion {
+   padding: 80px 0 48px;
+   scroll-margin-top: 52px;
+ }
+
+ .seccion-header {
+   padding: 0 48px 32px;
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-end;
+ }
+
+ .seccion-titulo {
+   font-family: 'Playfair Display', serif;
+   font-size: 32px;
+   font-weight: 700;
+   color: white;
+ }
+
+ .seccion-titulo em { color: var(--mostaza); font-style: italic; }
+
+ .seccion-sub {
+   font-size: 11px;
+   letter-spacing: 3px;
+   text-transform: uppercase;
+   color: rgba(255,255,255,0.7);
+   margin-top: 4px;
+ }
+
+ /* ===== GRID DE SLIDES ===== */
+ .slides-grid {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 24px;
+   padding: 0 48px;
+ }
+
+ /* ===== SLIDE BASE 1080x1080 ===== */
+ .slide {
+   width: 540px;
+   height: 540px;
+   position: relative;
+   overflow: hidden;
+   flex-shrink: 0;
+   cursor: pointer;
+   transition: transform 0.2s, box-shadow 0.2s;
+ }
+
+ .slide:hover {
+   transform: scale(1.015);
+   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+ }
+
+ .slide::before {
+   content: '';
+   position: absolute;
+   top: 0; left: 0; right: 0;
+   height: 8px;
+   background: var(--mostaza);
+   z-index: 10;
+ }
+
+ /* ===== FONDOS SÓLIDOS ===== */
+ .bg-crema { background: var(--crema); }
+ .bg-verde { background: var(--verde); }
+ .bg-mostaza { background: var(--mostaza); }
+
+ /* ===== FOTO DE FONDO ===== */
+ .s-foto {
+   position: absolute;
+   inset: 0;
+   background-size: cover;
+   background-position: center;
+   z-index: 0;
+ }
+
+ .s-foto-overlay-verde {
+   position: absolute;
+   inset: 0;
+   background: rgba(45,74,45,0.88);
+   z-index: 1;
+ }
+
+ .s-foto-overlay-crema {
+   position: absolute;
+   inset: 0;
+   background: rgba(240,235,216,0.92);
+   z-index: 1;
+ }
+
+ /* ===== LOGO CIRCULAR (Foto) ===== */
+ .s-logo-circular {
+   width: 150px;
+   height: 150px;
+   border-radius: 50%;
+   overflow: hidden;
+   border: 4px solid var(--mostaza);
+   background: var(--verde);
+   position: absolute;
+   top: 50px; left: 40px;
+   z-index: 10;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+ .s-logo-circular img {
+   width: 100%;
+   height: auto;
+ }
+
+ /* ===== ELEMENTOS COMUNES ===== */
+ .s-label {
+   position: absolute;
+   top: 32px; left: 40px;
+   font-size: 11px;
+   letter-spacing: 4px;
+   text-transform: uppercase;
+   font-weight: 600;
+   z-index: 5;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+ }
+
+ .s-label::before { content: '✦'; font-size: 9px; }
+ .s-label.gold { color: var(--mostaza); }
+ .s-label.crema { color: rgba(240,235,216,0.9); }
+ .s-label.verde { color: var(--verde); }
+
+ .s-num {
+   position: absolute;
+   bottom: 22px; right: 36px;
+   font-size: 11px;
+   letter-spacing: 2px;
+   z-index: 5;
+   font-weight: 500;
+ }
+
+ .s-num.gold { color: var(--mostaza); opacity: 0.95; }
+ .s-num.crema-op { color: rgba(240,235,216,0.8); }
+
+ .s-logo {
+   position: absolute;
+   bottom: 22px; left: 40px;
+   font-size: 11px;
+   letter-spacing: 3px;
+   text-transform: uppercase;
+   z-index: 5;
+   display: flex;
+   align-items: center;
+   gap: 6px;
+ }
+
+ .s-logo::before { content: '✦'; font-size: 8px; }
+ .s-logo.gold { color: var(--mostaza); opacity: 0.9; }
+ .s-logo.crema-op { color: rgba(240,235,216,0.8); }
+
+ .s-wave {
+   width: 280px;
+   height: 12px;
+   margin: 16px 0 20px;
+ }
+
+ .s-wave-sm {
+   width: 180px;
+   height: 10px;
+   margin: 12px 0 14px;
+ }
+
+ .s-border-left {
+   position: absolute;
+   top: 48px; left: 0;
+   width: 5px; height: calc(100% - 56px);
+   background: var(--mostaza);
+   opacity: 0.9;
+   z-index: 5;
+ }
+
+ .s-border-right {
+   position: absolute;
+   top: 32px; right: 32px;
+   width: 1px; height: calc(100% - 64px);
+   background: var(--mostaza);
+   opacity: 0.5;
+   z-index: 5;
+ }
+
+ .s-body {
+   position: absolute;
+   inset: 0;
+   padding: 64px 44px 52px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   z-index: 5;
+ }
+
+ /* ===== TIPOGRAFÍAS Y TAMAÑOS AJUSTADOS ===== */
+ .s-h1 {
+   font-family: 'Playfair Display', serif;
+   font-weight: 900;
+   line-height: 1.15;
+ }
+ .s-h1.verde { color: var(--verde); }
+ .s-h1.crema { color: var(--crema); }
+ .s-h1.mostaza { color: var(--mostaza); }
+ .s-h1.xl { font-size: 60px; }
+ .s-h1.lg { font-size: 50px; }
+ .s-h1.md { font-size: 42px; }
+ .s-h1.sm { font-size: 32px; }
+
+ /* Títulos Sans-Serif */
+ .s-sans-title {
+   font-family: 'DM Sans', sans-serif;
+   font-weight: 700;
+   letter-spacing: -1px;
+   line-height: 1.15;
+ }
+ .s-sans-title.verde { color: var(--verde); }
+ .s-sans-title.crema { color: var(--crema); }
+ .s-sans-title.xl { font-size: 52px; }
+ .s-sans-title.lg { font-size: 42px; }
+ .s-sans-title.md { font-size: 34px; }
+
+ /* Itálicas restringidas */
+ .s-italic {
+   font-family: 'Playfair Display', serif;
+   font-style: italic;
+   font-weight: 800;
+   line-height: 1.15;
+ }
+ .s-italic.verde { color: var(--verde); }
+ .s-italic.crema { color: var(--crema); }
+ .s-italic.mostaza { color: var(--mostaza); }
+ .s-italic.xl { font-size: 56px; }
+ .s-italic.lg { font-size: 46px; }
+ .s-italic.md { font-size: 38px; }
+ .s-italic.sm { font-size: 28px; }
+
+ .s-body-text {
+   font-family: 'DM Sans', sans-serif;
+   font-size: 17px;
+   line-height: 1.5;
+   font-weight: 500;
+ }
+ .s-body-text.verde { color: rgba(45,74,45,0.9); }
+ .s-body-text.crema { color: rgba(240,235,216,0.95); }
+
+ .s-tag {
+   font-size: 10px;
+   letter-spacing: 4px;
+   text-transform: uppercase;
+   font-weight: 700;
+ }
+ .s-tag.gold { color: var(--mostaza); }
+ .s-tag.crema-op { color: rgba(240,235,216,0.85); }
+ .s-tag.verde { color: var(--verde); }
+
+ .s-strike {
+   font-family: 'Playfair Display', serif;
+   font-size: 22px;
+   font-weight: 700;
+   text-decoration: line-through;
+   opacity: 0.6;
+   margin-bottom: 8px;
+ }
+ .s-strike.crema { color: var(--crema); }
+ .s-strike.verde { color: var(--verde); }
+
+ .s-list-dash {
+   width: 20px;
+   height: 2px;
+   background: var(--mostaza);
+   flex-shrink: 0;
+   align-self: center;
+ }
+ .s-list-dash.crema-op { background: rgba(240,235,216,0.7); }
+ .s-list-dash.verde-op { background: rgba(45,74,45,0.4); }
+
+ .s-faq-item {
+   margin-bottom: 14px;
+   padding-bottom: 14px;
+   border-bottom: 1px solid rgba(45,74,45,0.15);
+ }
+ .s-faq-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+ .s-faq-q {
+   font-family: 'Playfair Display', serif;
+   font-size: 18px;
+   font-weight: 700;
+   color: var(--verde);
+   margin-bottom: 4px;
+   line-height: 1.2;
+ }
+
+ .s-faq-a {
+   font-size: 14px;
+   color: rgba(45,74,45,0.85);
+   line-height: 1.5;
+   font-weight: 500;
+ }
+
+ .s-big-bullet {
+   display: flex;
+   gap: 14px;
+   align-items: flex-start;
+   margin-bottom: 12px;
+ }
+
+ .s-bullet-dot {
+   width: 8px; height: 8px;
+   background: var(--mostaza);
+   border-radius: 50%;
+   flex-shrink: 0;
+   margin-top: 9px;
+ }
+
+ .s-hr {
+   width: 100%;
+   height: 1px;
+   background: rgba(45,74,45,0.15);
+   margin: 18px 0;
+ }
+
+ .s-note {
+   font-family: 'Playfair Display', serif;
+   font-style: italic;
+   font-size: 20px;
+   color: rgba(240,235,216,0.8);
+   margin-top: 12px;
+ }
+ .s-note.verde { color: rgba(45,74,45,0.7); }
+
+ .s-dots {
+   position: absolute;
+   inset: 0;
+   background-image: radial-gradient(circle, rgba(201,146,42,0.1) 1px, transparent 1px);
+   background-size: 24px 24px;
+   z-index: 2;
+ }
+
+ .s-num-deco {
+   position: absolute;
+   font-family: 'Playfair Display', serif;
+   font-weight: 900;
+   color: rgba(45,74,45,0.06);
+   line-height: 1;
+   user-select: none;
+   z-index: 2;
+ }
+ .s-num-deco.crema { color: rgba(240,235,216,0.08); }
+
+ /* ===== SEPARADOR ===== */
+ .carrusel-sep {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   padding: 0 48px;
+   margin: 32px 0 24px;
+ }
+ .carrusel-sep-line { flex: 1; height: 1px; background: #333; }
+ .carrusel-sep-text { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #888; }
+
+ .scroll-top {
+   position: fixed;
+   bottom: 32px; right: 32px;
+   width: 44px; height: 44px;
+   background: var(--mostaza);
+   color: white;
+   border: none;
+   cursor: pointer;
+   font-size: 18px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 999;
+   opacity: 0.8;
+   transition: opacity 0.2s;
+ }
+ .scroll-top:hover { opacity: 1; }
+
+ .instruccion-global {
+   background: #222;
+   border: 1px solid #333;
+   padding: 16px 48px;
+   display: flex;
+   align-items: center;
+   gap: 16px;
+ }
+ .instruccion-global p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+ .instruccion-global strong { color: var(--mostaza); }
+ .spacer { height: 48px; }
+
+ .modal-overlay {
+   display: none;
+   position: fixed;
+   inset: 0;
+   background: rgba(0,0,0,0.92);
+   z-index: 2000;
+   align-items: center;
+   justify-content: center;
+ }
+ .modal-overlay.open { display: flex; }
+ .modal-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+ .modal-slide { width: min(90vw, 90vh); height: min(90vw, 90vh); position: relative; overflow: hidden; }
+ .modal-close { position: absolute; top: -44px; right: 0; background: none; border: none; color: white; font-size: 28px; cursor: pointer; padding: 8px; }
+ .modal-hint { position: absolute; bottom: -36px; left: 50%; transform: translateX(-50%); font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.5); text-transform: uppercase; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<nav class="nav-global">
+ <div class="nav-marca">Mate, Tinta <em> y Disparate</em></div>
+ <a class="nav-btn activo" href="#carrusel2">C1 · Qué no es</a>
+ <a class="nav-btn" href="#carrusel3">C2 · Libro álbum</a>
+ <a class="nav-btn" href="#carrusel4">C3 · El juego</a>
+ <a class="nav-btn" href="#carrusel5">C4 · Lo que aprendí</a>
+ <a class="nav-btn" href="#carrusel6">C5 · Un día en el encuentro</a>
+ <a class="nav-btn" href="#faq">FAQ</a>
+ <a class="nav-btn" href="#posts">Posts sueltos</a>
+</nav>
+
+<div style="height:52px"></div>
+
+<div class="instruccion-global">
+ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9922A" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+ <p>Hacé clic en cualquier slide para verla en grande. Para capturar: <strong>clic derecho → Guardar imagen</strong> o usá la herramienta de captura de pantalla de tu sistema. Cada slide mide 540×540px.</p>
+</div>
+
+<section class="seccion" id="carrusel2">
+ <div class="seccion-header">
+   <div>
+     <div class="seccion-titulo">Carrusel 1 — <em>Qué NO es este proyecto</em></div>
+     <div class="seccion-sub">6 slides · Transiciones ajustadas</div>
+   </div>
+ </div>
+
+ <div class="slides-grid">
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-verde"></div>
+     <div class="s-border-left"></div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag crema-op" style="margin-bottom:20px;">Antes de arrancar</div>
+       <div class="s-sans-title crema xl">Qué <em style="color:var(--mostaza);font-family:'Playfair Display',serif;font-style:italic;">no</em> es</div>
+       <div class="s-h1 crema lg">este proyecto</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.8"/></svg>
+       <div class="s-note">Deslizá →</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">01 / 06</div>
+   </div>
+
+   <div class="slide bg-mostaza" onclick="openModal(this)">
+     <div class="s-border-right" style="background:var(--verde);"></div>
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-tag crema" style="margin-bottom:20px;">01 · No es</div>
+       <div class="s-strike crema" style="font-family:'DM Sans',serif;">Una clase.</div>
+       <div class="s-sans-title crema lg" style="margin-top:12px;">Es un<br>encuentro.</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="var(--crema)" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-body-text crema" style="margin-top:8px;">No hay docente al frente. Hay una ronda y hay coordinación.</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num crema-op">02 / 06</div>
+   </div>
+
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1080&q=80&fit=crop&crop=center');"></div>
+     <div class="s-foto-overlay-crema"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-tag gold">02 · No es</div>
+       <div class="s-strike verde" style="font-family:'DM Sans',serif;">Corrección gramatical.</div>
+       <div class="s-sans-title verde xl" style="margin-top:12px;">Es<br>producción.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-body-text verde">Lo que escribiste vale tal como salió.</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">03 / 06</div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-border-left" style="background:var(--crema);opacity:0.2;"></div>
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-body" style="padding-left:56px;">
+       <div class="s-tag gold">03 · No hay</div>
+       <div class="s-h1 crema lg" style="margin-top:8px;">Respuesta<br>correcta.</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-sans-title crema md" style="margin-top:8px;font-weight:500;">Hay muchas lecturas.</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">04 / 06</div>
+   </div>
+
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-crema"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-tag gold">04 · No hace falta</div>
+       <div class="s-strike verde" style="font-family:'DM Sans',serif;">Experiencia previa.</div>
+       <div class="s-sans-title verde xl" style="margin-top:12px;">El punto<br>de partida<br>es ahora.</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">05 / 06</div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-dots"></div>
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold" style="margin-bottom:16px;">¿Qué sí es?</div>
+       <div class="s-sans-title crema lg">Un encuentro.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.4"/></svg>
+       <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Registro previo x G. Forms (link perfil)</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Arancel popular $10.000 (no excluyente)</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Sábados en Berisso · Domingos en La Plata</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Siempre te llevás un recuerdo de la jornada</div>
+         </div>
+       </div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">06 / 06</div>
+   </div>
+ </div>
+</section>
+
+<div class="carrusel-sep"><div class="carrusel-sep-line"></div><div class="carrusel-sep-text">siguiente carrusel</div><div class="carrusel-sep-line"></div></div>
+
+<section class="seccion" id="carrusel3">
+ <div class="seccion-header">
+   <div>
+     <div class="seccion-titulo">Carrusel 2 — <em>¿Qué es un libro álbum?</em></div>
+     <div class="seccion-sub">6 slides · Educativo</div>
+   </div>
+ </div>
+
+ <div class="slides-grid">
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-verde"></div>
+     <div class="s-border-right"></div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold" style="margin-bottom:20px;">Sobre literatura</div>
+       <div class="s-h1 crema xl">¿Qué es un</div>
+       <div class="s-sans-title crema xl">libro álbum?</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-body-text crema">No es un libro con dibujitos.<br>Es otra cosa.</div>
+       <div class="s-note">Deslizá →</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">01 / 06</div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div class="s-border-left"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-body" style="padding-left:56px;">
+       <div class="s-tag gold">En un libro común</div>
+       <div class="s-h1 verde lg" style="margin-top:12px;">La imagen<br>acompaña.</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-body-text verde">"Imagen como ornamento"</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">02 / 06</div>
+   </div>
+
+   <div class="slide bg-mostaza" onclick="openModal(this)">
+     <div class="s-border-right" style="background:var(--verde);"></div>
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-tag crema">En un libro álbum</div>
+       <div class="s-sans-title crema lg" style="margin-top:12px;">La imagen<br>narra.</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="var(--crema)" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-body-text crema" style="margin-top:8px;">Puede decir lo contrario que el texto. Las dos lecturas generan una tercera.</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num crema-op">03 / 06</div>
+   </div>
+
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1550399105-c4db5fb85c18?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-crema"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-tag gold">Ejemplo · Isol</div>
+       <div class="s-sans-title verde xl" style="margin-top:12px;">"Secreto<br>de familia"</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-body-text verde">Isol · Argentina</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">04 / 06</div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-border-right"></div>
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-tag gold">¿Para quién?</div>
+       <div class="s-sans-title crema lg" style="margin-top:12px;">Para todas<br>las edades.</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-body-text crema" style="margin-top:20px;">Cada edad ve algo diferente.</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">05 / 06</div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div class="s-dots"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold" style="margin-bottom:12px;">A partir de mayo</div>
+       <div class="s-sans-title verde lg">¿Venís?</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.4"/></svg>
+       <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Registro previo x G. Forms (link perfil)</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Aporte $10.000 (no excluyente)</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Sábados en Berisso · Domingos en La Plata</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Siempre te llevás un recuerdo de la jornada</div>
+         </div>
+       </div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">06 / 06</div>
+   </div>
+ </div>
+</section>
+
+<div class="carrusel-sep"><div class="carrusel-sep-line"></div><div class="carrusel-sep-text">siguiente carrusel</div><div class="carrusel-sep-line"></div></div>
+
+<section class="seccion" id="carrusel4">
+ <div class="seccion-header">
+   <div>
+     <div class="seccion-titulo">Carrusel 3 — <em>El juego no es lo contrario del aprendizaje</em></div>
+     <div class="seccion-sub">5 slides · Pedagógico</div>
+   </div>
+ </div>
+
+ <div class="slides-grid">
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1080&q=80&fit=crop&crop=hands');"></div>
+     <div class="s-foto-overlay-crema"></div>
+     <div class="s-border-left"></div>
+     <div class="s-label gold">Pedagogía</div>
+     <div class="s-body">
+       <div style="background:var(--verde);display:inline-block;padding:8px 16px;margin-bottom:20px;">
+         <div style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--crema);font-weight:700;">Para pensar</div>
+       </div>
+       <div class="s-h1 verde xl">"El juego<br>no es un recreo<br>del aprendizaje."</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-note verde">Deslizá →</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">01 / 05</div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-tag gold" style="margin-bottom:16px;">La trampa del "aprender jugando"</div>
+       <div class="s-sans-title crema lg" style="margin-top:8px;">Cuando el juego<br>es solo un envase,</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-sans-title crema lg" style="margin-top:8px;">deja de ser juego.</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">02 / 05</div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-tag gold">Jugar de verdad implica</div>
+       <div style="display:flex;flex-direction:column;gap:18px;margin-top:20px;">
+         <div class="s-big-bullet">
+           <div class="s-bullet-dot"></div>
+           <div class="s-sans-title verde md">Incertidumbre.</div>
+         </div>
+         <div class="s-big-bullet">
+           <div class="s-bullet-dot"></div>
+           <div class="s-sans-title verde md">Posibilidad de error.</div>
+         </div>
+         <div class="s-big-bullet">
+           <div class="s-bullet-dot"></div>
+           <div class="s-sans-title verde md">Libertad de acción.</div>
+         </div>
+       </div>
+       <div class="s-body-text verde" style="margin-top:24px;">Eso activa otro tipo de atención.</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">03 / 05</div>
+   </div>
+
+   <div class="slide bg-mostaza" onclick="openModal(this)">
+     <div class="s-border-left" style="background:var(--verde);"></div>
+     <div class="s-label crema">En escritura</div>
+     <div class="s-body">
+       <div class="s-tag crema" style="margin-bottom:20px;">En escritura</div>
+       <div class="s-sans-title crema xl">La consigna lúdica</div>
+       <div class="s-h1 crema lg">baja la defensa.</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="var(--crema)" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-body-text crema" style="margin-top:8px;">"No sé escribir" desaparece cuando la consigna invita a arriesgarse.</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num crema-op">04 / 05</div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div class="s-dots"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold" style="margin-bottom:12px;">Eso hacemos acá</div>
+       <div class="s-sans-title verde xl">Jugamos.</div>
+       <div class="s-h1 verde lg">Y algo aparece<br>siempre.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Registro previo x G. Forms (link perfil)</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Aporte $10.000 (no excluyente)</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Siempre te llevás un recuerdo de la jornada</div>
+         </div>
+       </div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">05 / 05</div>
+   </div>
+ </div>
+</section>
+
+<div class="carrusel-sep"><div class="carrusel-sep-line"></div><div class="carrusel-sep-text">siguiente carrusel</div><div class="carrusel-sep-line"></div></div>
+
+<section class="seccion" id="carrusel5">
+ <div class="seccion-header">
+   <div>
+     <div class="seccion-titulo">Carrusel 4 — <em>Lo que aprendí de mis estudiantes</em></div>
+     <div class="seccion-sub">5 slides · Conexión personal</div>
+   </div>
+ </div>
+
+ <div class="slides-grid">
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-verde"></div>
+     <div class="s-border-right"></div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-h1 crema xl">"Lo que me<br>enseñaron<br>mis estudiantes"</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-note">Deslizá →</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">01 / 05</div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div class="s-border-left"></div>
+     <div class="s-label gold">01</div>
+     <div class="s-body" style="padding-left:56px;">
+       <div class="s-tag gold">Que el humor es serio</div>
+       <div class="s-sans-title verde xl" style="margin-top:16px;">El análisis<br>más preciso</div>
+       <div class="s-h1 verde xl" style="margin-top:8px;">me lo dio<br>una nena de 8.</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">02 / 05</div>
+   </div>
+
+   <div class="slide bg-mostaza" onclick="openModal(this)">
+     <div class="s-border-right" style="background:var(--verde);"></div>
+     <div class="s-label crema">02</div>
+     <div class="s-body">
+       <div class="s-tag crema">Que "no entender" es válido</div>
+       <div class="s-sans-title crema lg" style="margin-top:16px;">"No entiendo<br>nada pero<br>me gustó."</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="var(--crema)" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-body-text crema" style="margin-top:8px;">Eso también es una respuesta lectora.</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num crema-op">03 / 05</div>
+   </div>
+
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-crema"></div>
+     <div class="s-label gold">03</div>
+     <div class="s-body">
+       <div class="s-tag gold">Que la interpretación no es individual</div>
+       <div class="s-h1 verde xl" style="margin-top:16px;">Solos, leemos<br>lo que ya<br>sabemos ver.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-body-text verde">Con otros, el texto se abre.</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">04 / 05</div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-border-left" style="background:var(--crema);opacity:0.2;"></div>
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold" style="margin-bottom:12px;">Por eso este espacio</div>
+       <div class="s-sans-title crema xl">Para seguir<br>aprendiendo.</div>
+       <div class="s-h1 crema lg" style="margin-top:8px;">Juntos.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.4"/></svg>
+       <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Registro previo x G. Forms (link perfil)</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Siempre te llevás un recuerdo de la jornada</div>
+         </div>
+       </div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">05 / 05</div>
+   </div>
+ </div>
+</section>
+
+<div class="carrusel-sep"><div class="carrusel-sep-line"></div><div class="carrusel-sep-text">siguiente carrusel</div><div class="carrusel-sep-line"></div></div>
+
+<section class="seccion" id="carrusel6">
+ <div class="seccion-header">
+   <div>
+     <div class="seccion-titulo">Carrusel 5 — <em>Un día en el encuentro</em></div>
+     <div class="seccion-sub">6 slides · Convocatoria</div>
+   </div>
+ </div>
+
+ <div class="slides-grid">
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-crema"></div>
+     <div class="s-border-left"></div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold" style="margin-bottom:20px;">¿Cómo es un encuentro?</div>
+       <div class="s-sans-title verde xl">Dos horas.</div>
+       <div class="s-h1 verde lg">Sin examen.<br>Sin tarea.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-note verde">Deslizá →</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">01 / 06</div>
+   </div>
+
+   <div class="slide bg-mostaza" onclick="openModal(this)">
+     <div class="s-num-deco crema" style="font-size:280px;bottom:-20px;right:-10px;">1</div>
+     <div class="s-border-right" style="background:var(--verde);"></div>
+     <div class="s-label crema">Momento 1</div>
+     <div class="s-body">
+       <div class="s-tag crema" style="margin-bottom:20px;">Momento 1</div>
+       <div class="s-sans-title crema xl" style="line-height:1;margin-bottom:12px;">Apertura<br>lúdica</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="var(--crema)" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-body-text crema" style="margin-top:10px;">Música, objetos, una pregunta rara. Para instalar el pacto de ficción del día.</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num crema-op">02 / 06</div>
+   </div>
+
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-crema"></div>
+     <div class="s-num-deco" style="font-size:280px;bottom:-20px;right:-10px;color:rgba(45,74,45,0.06);">2</div>
+     <div class="s-label gold">Momento 2</div>
+     <div class="s-body">
+       <div class="s-tag gold">Momento 2</div>
+       <div class="s-h1 verde xl" style="line-height:1;margin-bottom:12px;">Lectura<br>en voz alta.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-body-text verde">Leer en voz alta cambia el texto.</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">03 / 06</div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-border-left" style="background:var(--crema);opacity:0.2;"></div>
+     <div class="s-num-deco crema" style="font-size:280px;bottom:-20px;right:-10px;">3</div>
+     <div class="s-label crema">Momento 3</div>
+     <div class="s-body" style="padding-left:56px;">
+       <div class="s-tag gold">Momento 3</div>
+       <div class="s-h1 crema xl" style="line-height:1;margin-bottom:12px;">Desarme<br>y debate.</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-body-text crema">¿Qué vio cada quien?</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">04 / 06</div>
+   </div>
+
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1566837945700-30057527ade0?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-crema"></div>
+     <div class="s-num-deco" style="font-size:280px;bottom:-20px;right:-10px;color:rgba(45,74,45,0.05);">4</div>
+     <div class="s-label gold">Momento 4 y 5</div>
+     <div class="s-body">
+       <div class="s-tag gold">Momento 4 y 5</div>
+       <div class="s-sans-title verde xl" style="line-height:1;margin-bottom:12px;">Producción.</div>
+       <div class="s-h1 verde lg">Y tendal.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-body-text verde">Efímero, visible, colectivo.</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">05 / 06</div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-dots"></div>
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold" style="margin-bottom:12px;">A partir de mayo</div>
+       <div class="s-sans-title crema xl">¿Venís?</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.4"/></svg>
+       <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Registro previo x G. Forms (link perfil)</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Sábados en Berisso · Domingos en La Plata</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Aporte $10.000 (no excluyente) · Abierto</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash crema-op"></div>
+           <div class="s-body-text crema">Siempre te llevás un recuerdo de la jornada</div>
+         </div>
+       </div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">06 / 06</div>
+   </div>
+ </div>
+</section>
+
+<div class="carrusel-sep"><div class="carrusel-sep-line"></div><div class="carrusel-sep-text">siguiente carrusel</div><div class="carrusel-sep-line"></div></div>
+
+<section class="seccion" id="faq">
+ <div class="seccion-header">
+   <div>
+     <div class="seccion-titulo">FAQ — <em>Preguntas frecuentes</em></div>
+     <div class="seccion-sub">6 slides · Convocatoria</div>
+   </div>
+ </div>
+
+ <div class="slides-grid">
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1526243741027-444d633d7365?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-verde"></div>
+     <div class="s-border-right"></div>
+     <div class="s-dots"></div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold" style="margin-bottom:20px;">Todo lo que querías saber</div>
+       <div class="s-h1 crema xl">Preguntas</div>
+       <div class="s-sans-title crema xl">frecuentes.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-note">Deslizá →</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">01 / 06</div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div class="s-border-left"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-body" style="padding-left:56px;">
+       <div class="s-faq-item">
+         <div class="s-faq-q">¿Hace falta experiencia previa?</div>
+         <div class="s-faq-a">No. Ninguna. El punto de partida es el que tenés ahora mismo.</div>
+       </div>
+       <div class="s-hr"></div>
+       <div class="s-faq-item">
+         <div class="s-faq-q">¿Y si hace mucho que no leo nada?</div>
+         <div class="s-faq-a">Tampoco importa. El encuentro no evalúa ni exige conocimiento previo.</div>
+       </div>
+       <div class="s-hr"></div>
+       <div class="s-faq-item">
+         <div class="s-faq-q">¿Me llevo algo del encuentro?</div>
+         <div class="s-faq-a">Sí. Además del mate y la experiencia compartida, siempre te llevás un recuerdo tangible de cada jornada.</div>
+       </div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">02 / 06</div>
+   </div>
+
+   <div class="slide bg-mostaza" onclick="openModal(this)">
+     <div class="s-border-right" style="background:var(--verde);"></div>
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-faq-item" style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(240,235,216,0.3);">
+         <div class="s-faq-q" style="color:var(--crema);">¿Pueden venir con bebés o niños chicos?</div>
+         <div class="s-faq-a" style="color:rgba(240,235,216,0.9);">Sí. El espacio es al aire libre y la dinámica es totalmente abierta.</div>
+       </div>
+       <div class="s-faq-item" style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(240,235,216,0.3);">
+         <div class="s-faq-q" style="color:var(--crema);">¿Tiene costo?</div>
+         <div class="s-faq-a" style="color:rgba(240,235,216,0.9);">Sugerimos un aporte popular de $10.000, pero no es excluyente. Que la plata no sea un freno para venir.</div>
+       </div>
+       <div class="s-faq-item">
+         <div class="s-faq-q" style="color:var(--crema);">¿Cuánto dura?</div>
+         <div class="s-faq-a" style="color:rgba(240,235,216,0.9);">Dos horas. Apertura, lectura, debate, producción y tendal.</div>
+       </div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num crema-op">03 / 06</div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-faq-item">
+         <div class="s-faq-q">¿Para qué edades es?</div>
+         <div class="s-faq-a">Para todas. Infancias, jóvenes, adultos y adultos mayores. En la misma ronda. Abierto a la comunidad.</div>
+       </div>
+       <div class="s-hr"></div>
+       <div class="s-faq-item">
+         <div class="s-faq-q">¿Los chicos pueden participar solos?</div>
+         <div class="s-faq-a">Dependiendo de la edad, sí. Mejor consultar antes por WA.</div>
+       </div>
+       <div class="s-hr"></div>
+       <div class="s-faq-item">
+         <div class="s-faq-q">¿Es un taller tradicional?</div>
+         <div class="s-faq-a">No. Sin corrección, sin evaluación, sin respuesta correcta.</div>
+       </div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">04 / 06</div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-label crema">Mate, Tinta y Disparate</div>
+     <div class="s-body">
+       <div class="s-faq-item" style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(240,235,216,0.15);">
+         <div class="s-faq-q" style="color:var(--crema);">¿Qué textos van a leer?</div>
+         <div class="s-faq-a" style="color:rgba(240,235,216,0.85);">Walsh, Cortázar, Isol, Ema Wolf, Gustavo Roldán. Literatura argentina con muchas capas.</div>
+       </div>
+       <div class="s-faq-item" style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(240,235,216,0.15);">
+         <div class="s-faq-q" style="color:var(--crema);">¿Me llevo algo del encuentro?</div>
+         <div class="s-faq-a" style="color:rgba(240,235,216,0.85);">Sí, siempre te llevás un recuerdo tangible de la jornada, un detallito del encuentro.</div>
+       </div>
+       <div class="s-faq-item">
+         <div class="s-faq-q" style="color:var(--crema);">¿Hay que anotarse?</div>
+         <div class="s-faq-a" style="color:rgba(240,235,216,0.85);">Sí, pedimos registro previo (x G. Forms en link perfil) para tener en cuenta materiales, pero siempre está abierto para que se sumen.</div>
+       </div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">05 / 06</div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div class="s-dots"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-logo-circular">
+       <img src="1000106533.png" alt="Logo Mate, Tinta y Disparate">
+     </div>
+     <div class="s-body" style="padding-top:100px;">
+       <div class="s-tag gold">¿Más preguntas?</div>
+       <div class="s-sans-title verde lg">Escribinos.<br>Nos vemos.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+             @mate.tinta.disparate · WA: 221 661-1150
+           </div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Sábados en Berisso · Domingos en La Plata</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">G. Forms (link perfil) para materiales</div>
+         </div>
+         <div style="display:flex;gap:12px;align-items:center;">
+           <div class="s-list-dash"></div>
+           <div class="s-body-text verde">Siempre te llevás un detallito del encuentro</div>
+         </div>
+       </div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+     <div class="s-num gold">06 / 06</div>
+   </div>
+ </div>
+</section>
+
+<div class="carrusel-sep"><div class="carrusel-sep-line"></div><div class="carrusel-sep-text">posts individuales</div><div class="carrusel-sep-line"></div></div>
+
+<section class="seccion" id="posts">
+ <div class="seccion-header">
+   <div>
+     <div class="seccion-titulo">Posts individuales</div>
+     <div class="seccion-sub">Frases, convocatoria, cuenta regresiva, pregunta</div>
+   </div>
+ </div>
+
+ <div class="slides-grid">
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div style="position:absolute;top:8px;right:0;bottom:0;width:12px;background:var(--verde);z-index:3;"></div>
+     <div class="s-label gold">Mate, Tinta y Disparate</div>
+     <div class="s-body" style="padding-right:56px;">
+       <div style="font-family:'Playfair Display',serif;font-size:100px;font-weight:900;color:var(--mostaza);line-height:0.7;opacity:0.2;margin-bottom:8px;">"</div>
+       <div class="s-sans-title verde xl">No venimos<br>a escribir bien.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div class="s-h1 verde xl">Venimos a<br>animarnos.</div>
+       <div class="s-note verde">— Mate, Tinta y Disparate</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+   </div>
+
+   <div class="slide bg-mostaza" onclick="openModal(this)">
+     <div style="position:absolute;top:8px;left:0;right:0;height:50%;background:var(--verde);z-index:1;"></div>
+     <div class="s-label crema" style="z-index:5;">A partir de mayo 2026</div>
+     <div class="s-body" style="z-index:5;">
+       <div class="s-h1 crema xl" style="line-height:0.95;">Mate,<br>Tinta</div>
+       <div class="s-italic crema xl" style="color:var(--mostaza);">y Disparate</div>
+     </div>
+     <div style="position:absolute;bottom:48px;left:44px;right:44px;z-index:5;">
+       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+         <div style="background:var(--verde);padding:14px 18px;">
+           <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,235,216,0.7);margin-bottom:4px;">Dom</div>
+           <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:var(--crema);line-height:1.3;">C.C. Olga Vázquez<br><span style="color:var(--crema);opacity:0.7;">La Plata</span></div>
+         </div>
+         <div style="background:var(--verde);padding:14px 18px;">
+           <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(240,235,216,0.7);margin-bottom:4px;">Sáb</div>
+           <div style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:var(--crema);line-height:1.3;">El Clú<br><span style="color:var(--crema);opacity:0.7;">Berisso</span></div>
+         </div>
+       </div>
+       <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--verde);font-weight:700;text-align:center;">G. Forms (link perfil) para materiales</div>
+     </div>
+     <div style="position:absolute;bottom:18px;right:40px;font-size:11px;letter-spacing:2px;color:rgba(45,74,45,0.7);z-index:5;">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+   </div>
+
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1080&q=80&fit=crop');"></div>
+     <div style="position:absolute;bottom:0;left:0;right:0;height:55%;background:rgba(240,235,216,0.88);z-index:1;"></div>
+     <div class="s-border-left"></div>
+     <div class="s-label gold">Para pensar</div>
+     <div class="s-body" style="padding-left:56px;justify-content:flex-end;padding-bottom:80px;">
+       <div class="s-sans-title verde xl" style="margin-bottom:16px;">¿Cuándo fue<br>la última vez<br>que leíste algo</div>
+       <div class="s-h1 verde xl">solo por<br>placer?</div>
+       <div style="margin-top:16px;font-size:14px;color:rgba(45,74,45,0.85);letter-spacing:1px;font-weight:500;">Contame en los comentarios.</div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+   </div>
+
+   <div class="slide bg-verde" onclick="openModal(this)">
+     <div class="s-dots"></div>
+     <div class="s-border-right"></div>
+     <div class="s-label crema">Para debatir</div>
+     <div class="s-body">
+       <div style="font-family:'Playfair Display',serif;font-size:80px;font-weight:900;color:var(--mostaza);line-height:0.7;opacity:0.25;margin-bottom:8px;">"</div>
+       <div class="s-h1 crema lg">La corrección gramatical punitiva</div>
+       <div class="s-h1 crema lg" style="margin-top:8px;">mata más escritores</div>
+       <div class="s-sans-title crema lg" style="color:var(--mostaza);">que la hoja en blanco.</div>
+       <svg class="s-wave-sm" viewBox="0 0 180 10"><path d="M0,5 Q22,0 45,5 Q67,10 90,5 Q112,0 135,5 Q157,10 180,5" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+       <div class="s-note">— Mate, Tinta y Disparate</div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+   </div>
+
+   <div class="slide bg-crema" onclick="openModal(this)">
+     <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:0;">
+       <div style="font-family:'Playfair Display',serif;font-size:380px;font-weight:900;color:var(--mostaza);opacity:0.08;line-height:1;user-select:none;">3</div>
+     </div>
+     <div class="s-label gold">Cuenta regresiva</div>
+     <div class="s-body">
+       <div class="s-tag gold" style="margin-bottom:16px;">Faltan</div>
+       <div class="s-h1 verde" style="font-size:160px;line-height:0.85;">3</div>
+       <div class="s-h1 verde lg" style="margin-top:8px;">días.</div>
+       <svg class="s-wave" viewBox="0 0 280 12"><path d="M0,6 Q35,0 70,6 Q105,12 140,6 Q175,0 210,6 Q245,12 280,6" stroke="#C9922A" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+       <div style="display:flex;flex-direction:column;gap:6px;">
+         <div style="display:flex;gap:10px;"><div class="s-list-dash"></div><div class="s-body-text verde" style="font-size:14px;">Anotate x G. Forms (link perfil)</div></div>
+         <div style="display:flex;gap:10px;"><div class="s-list-dash"></div><div class="s-body-text verde" style="font-size:14px;">Siempre te llevás un detallito</div></div>
+       </div>
+     </div>
+     <div class="s-logo gold">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+   </div>
+
+   <div class="slide" onclick="openModal(this)">
+     <div class="s-foto" style="background-image:url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=1080&q=80&fit=crop');"></div>
+     <div class="s-foto-overlay-verde"></div>
+     <div class="s-label crema">El nombre</div>
+     <div class="s-body">
+       <div style="display:flex;flex-direction:column;gap:20px;">
+         <div style="padding-bottom:16px;border-bottom:1px solid rgba(240,235,216,0.15);">
+           <div class="s-sans-title crema sm">Mate.</div>
+           <div class="s-body-text crema" style="font-size:14px;margin-top:4px;">La ronda. Lo que se comparte sin protocolo.</div>
+         </div>
+         <div style="padding-bottom:16px;border-bottom:1px solid rgba(240,235,216,0.15);">
+           <div class="s-sans-title crema sm">Tinta.</div>
+           <div class="s-body-text crema" style="font-size:14px;margin-top:4px;">Lo que dejás en el papel aunque no sea perfecto.</div>
+         </div>
+         <div>
+           <div class="s-italic mostaza sm">Disparate.</div>
+           <div class="s-body-text crema" style="font-size:14px;margin-top:4px;">El juego, el absurdo, el riesgo.</div>
+         </div>
+       </div>
+     </div>
+     <div class="s-logo crema-op">
+       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:2px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+       @mate.tinta.disparate
+     </div>
+   </div>
+ </div>
+</section>
+
+<div class="spacer"></div>
+
+<div class="modal-overlay" id="modal" onclick="closeModal()">
+ <div class="modal-inner" onclick="event.stopPropagation()">
+   <button class="modal-close" onclick="closeModal()">×</button>
+   <div class="modal-slide" id="modal-content"></div>
+   <div class="modal-hint">Clic fuera para cerrar · Clic derecho → Guardar imagen</div>
+ </div>
+</div>
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+ function openModal(slide) {
+   const modal = document.getElementById('modal');
+   const content = document.getElementById('modal-content');
+   content.innerHTML = '';
+   const clone = slide.cloneNode(true);
+   clone.style.width = '100%';
+   clone.style.height = '100%';
+   clone.style.transform = 'none';
+   clone.style.cursor = 'default';
+   clone.onclick = null;
+   content.appendChild(clone);
+   modal.classList.add('open');
+   document.body.style.overflow = 'hidden';
+ }
+
+ function closeModal() {
+   document.getElementById('modal').classList.remove('open');
+   document.body.style.overflow = '';
+ }
+
+ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+ const sections = document.querySelectorAll('section[id]');
+ const navBtns = document.querySelectorAll('.nav-btn');
+
+ window.addEventListener('scroll', () => {
+   let current = '';
+   sections.forEach(s => {
+     if(window.scrollY >= s.offsetTop - 100) current = s.id;
+   });
+   navBtns.forEach(b => {
+     b.classList.remove('activo');
+     if(b.getAttribute('href') === '#' + current) b.classList.add('activo');
+   });
+ });
+</script>
+
+</body>
+</html>
