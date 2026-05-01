@@ -68,7 +68,7 @@ body { background: var(--crema); font-family: 'DM Sans', sans-serif; color: var(
 /* NAVEGACIÓN BASE */
 .nav-list { list-style: none; display: flex; gap: 2rem; }
 .nav-list a { text-decoration: none; color: var(--crema); text-transform: uppercase; font-weight: 600; letter-spacing: 2px; font-size: 0.75rem; transition: color 0.3s; }
-.nav-list a:hover { color: var(--mostaza); }
+.nav-list a:hover, .nav-list a.active { color: var(--mostaza); }
 
 /* HAMBURGUESA */
 .menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.4); z-index: var(--z-overlay); backdrop-filter: blur(2px); }

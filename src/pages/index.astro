@@ -188,6 +188,28 @@ if (fs.existsSync(photosDir)) {
       observer.observe(placeholder);
     }
 
+    // --- ACTUALIZAR HASH EN URL AL SCROLLEAR ---
+    const sections = document.querySelectorAll('section[id]');
+    const hashObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          // Actualizamos la URL sin recargar ni saltar
+          history.replaceState(null, '', `#${id}`);
+          
+          // Opcional: Activar el link correspondiente en el menú
+          document.querySelectorAll('.nav-list a').forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, { 
+      threshold: 0.5, // Se activa cuando el 50% de la sección es visible
+      rootMargin: '-10% 0px -40% 0px' // Ajuste para que se sienta más natural al bajar
+    });
+
+    sections.forEach(section => hashObserver.observe(section));
+
     // --- LÓGICA DE GALERÍA (Delegación de Eventos) ---
     const galeria = document.getElementById('galeria-encuentros');
     const visor = document.getElementById('visualizador');
