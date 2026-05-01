@@ -1,24 +1,16 @@
 services:
   web:
-    # Ahora descargamos la imagen construida por GitHub Actions
-    image: ghcr.io/reimonlp/mate.tinta.disparate:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "8080:4321"
     restart: unless-stopped
     container_name: mate-tinta-disparate
     networks:
       - proxy-network
-
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    environment:
-      - DOCKER_API_VERSION=1.40
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    # Revisa actualizaciones de 'mate-tinta-disparate' cada 30 segundos
-    command: --interval 30 mate-tinta-disparate
-    restart: unless-stopped
+      - .:/app
 
 networks:
   proxy-network:

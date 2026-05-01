@@ -30,10 +30,6 @@ const stats = [
       <h1 class="page-title">Resumen del Sitio</h1>
       <p class="page-description">Aquí podés ver un pantallazo rápido del contenido publicado en tu web.</p>
     </div>
-    <button id="btn-config-token" class="action-btn" style="padding: 0.5rem 1rem; flex-direction: row; font-size: 0.85rem; border-color: transparent; background: #e5e7eb;">
-      <svg viewBox="0 0 24 24" style="width:16px; height:16px;" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-      Configurar GitHub Token
-    </button>
   </header>
 
   <!-- Métricas -->
@@ -61,23 +57,6 @@ const stats = [
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
         Añadir Reseña
       </button>
-    </div>
-  </div>
-
-  <!-- Modal: Token -->
-  <div class="modal-overlay" id="modal-token">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Cerrar">✖</button>
-      <h2 class="modal-title">Autenticación GitHub</h2>
-      <p style="margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--admin-text-muted);">
-        Para administrar la web en vivo, necesitás un <strong>Personal Access Token (Clásico)</strong> de GitHub con el permiso <code>repo</code> marcado. 
-        <a href="https://github.com/settings/tokens/new?scopes=repo&description=MateTintaDisparate_CMS" target="_blank" style="color: var(--admin-primary); font-weight: bold;">Generalo acá</a>.
-      </p>
-      <div class="form-group">
-        <label>Tu Token de GitHub</label>
-        <input type="password" id="github-token-input" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
-      </div>
-      <button class="btn-primary" id="save-token-btn">Guardar Token</button>
     </div>
   </div>
 
@@ -134,16 +113,7 @@ const stats = [
   </style>
 
   <script>
-    // Configuración Base
-    const REPO = 'reimonlp/mate.tinta.disparate';
-    const BRANCH = 'main';
-    
     // Elementos del DOM
-    const btnConfigToken = document.getElementById('btn-config-token');
-    const modalToken = document.getElementById('modal-token');
-    const inputToken = document.getElementById('github-token-input') as HTMLInputElement;
-    const btnSaveToken = document.getElementById('save-token-btn');
-
     const btnAddPhoto = document.getElementById('btn-add-photo');
     const modalPhoto = document.getElementById('modal-photo');
     const inputPhoto = document.getElementById('photo-input') as HTMLInputElement;
@@ -182,63 +152,9 @@ const stats = [
       });
     });
 
-    // Validar Token Helper
-    function getGHHeaders() {
-      const token = localStorage.getItem('gh_token');
-      if (!token) {
-        openModal(modalToken);
-        throw new Error('No hay token');
-      }
-      return {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json'
-      };
-    }
-
-    // API Call a GitHub para crear archivos
-    async function commitFileToGitHub(path: string, message: string, contentBase64: string) {
-      const url = `https://api.github.com/repos/${REPO}/contents/${path}`;
-      const body = {
-        message: message,
-        content: contentBase64,
-        branch: BRANCH
-      };
-
-      const res = await fetch(url, {
-        method: 'PUT',
-        headers: getGHHeaders(),
-        body: JSON.stringify(body)
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.message || 'Error al guardar en GitHub');
-      }
-      return res.json();
-    }
-
-    // 1. Lógica Token
-    if (btnConfigToken && modalToken && btnSaveToken) {
-      btnConfigToken.addEventListener('click', () => {
-        if(inputToken) inputToken.value = localStorage.getItem('gh_token') || '';
-        openModal(modalToken);
-      });
-
-      btnSaveToken.addEventListener('click', () => {
-        const token = inputToken?.value.trim();
-        if (token) {
-          localStorage.setItem('gh_token', token);
-          showToast('Token guardado correctamente');
-          closeModal(modalToken);
-        }
-      });
-    }
-
-    // 2. Lógica Subir Foto
+    // 1. Lógica Subir Foto (Local API)
     if (btnAddPhoto && modalPhoto && btnSubmitPhoto && inputPhoto) {
       btnAddPhoto.addEventListener('click', () => {
-        if (!localStorage.getItem('gh_token')) { openModal(modalToken); return; }
         openModal(modalPhoto);
       });
 
@@ -254,18 +170,23 @@ const stats = [
           reader.readAsDataURL(file);
           reader.onload = async () => {
             try {
-              // Limpiar metadata "data:image/jpeg;base64," del string
               const base64Content = (reader.result as string).split(',')[1];
               const datePrefix = new Date().toISOString().split('T')[0];
               const safeName = file.name.replace(/[^a-zA-Z0-9.]/g, '-').toLowerCase();
               const fileName = `${datePrefix}-${safeName}`;
-              const path = `public/photos/${fileName}`;
 
-              await commitFileToGitHub(path, `content: agregar foto ${fileName} a la galería`, base64Content);
+              const res = await fetch('/api/upload-photo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ base64Content, fileName })
+              });
+
+              if (!res.ok) throw new Error('Error al subir la foto');
               
-              showToast('¡Foto subida! La web se actualizará en 30s');
+              showToast('¡Foto subida correctamente!');
               closeModal(modalPhoto);
               inputPhoto.value = '';
+              setTimeout(() => window.location.reload(), 2000);
             } catch (err: any) {
               showToast(err.message, true);
             } finally {
@@ -281,10 +202,9 @@ const stats = [
       });
     }
 
-    // 3. Lógica Añadir Reseña
+    // 2. Lógica Añadir Reseña (Local API)
     if (btnAddReview && modalReview && btnSubmitReview && inputReviewAuthor && inputReviewText) {
       btnAddReview.addEventListener('click', () => {
-        if (!localStorage.getItem('gh_token')) { openModal(modalToken); return; }
         openModal(modalReview);
       });
 
@@ -298,25 +218,19 @@ const stats = [
         btnSubmitReview.innerText = 'Guardando...';
 
         try {
-          // Generar Markdown: 
-          // ---
-          // autor: ...
-          // ---
-          // "texto"
-          const markdownContent = `---\nautor: ${author}\n---\n"${text}"`;
-          // Convertir UTF-8 string a Base64 sin romper caracteres latinos (áéíóú)
-          const base64Content = btoa(unescape(encodeURIComponent(markdownContent)));
-          
-          const safeName = author.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase().substring(0, 20);
-          const timestamp = Date.now();
-          const path = `src/content/comunidad/${safeName}-${timestamp}.md`;
+          const res = await fetch('/api/add-review', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ author, text })
+          });
 
-          await commitFileToGitHub(path, `content: añadir reseña de ${author}`, base64Content);
+          if (!res.ok) throw new Error('Error al guardar la reseña');
           
-          showToast('¡Reseña añadida! La web se actualizará en 30s');
+          showToast('¡Reseña añadida correctamente!');
           closeModal(modalReview);
           inputReviewAuthor.value = '';
           inputReviewText.value = '';
+          setTimeout(() => window.location.reload(), 2000);
         } catch (err: any) {
           showToast(err.message, true);
         } finally {

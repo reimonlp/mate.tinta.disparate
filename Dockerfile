@@ -1,22 +1,16 @@
-# Etapa 1: Build
-FROM node:22-alpine AS build
+FROM node:22-alpine
+
+# Instalar git para el script de sincronización
+RUN apk add --no-cache git bash
+
 WORKDIR /app
 
-# Copiamos package.json y package-lock.json (si existe)
-COPY package*.json ./
-RUN npm install
+# Copiar el script de entrada (asegurarse que tenga permisos de ejecución)
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Copiamos el resto del código y construimos el sitio estático
-COPY . .
-RUN npm run build
+# Exponer el puerto por defecto de Astro SSR
+EXPOSE 4321
 
-# Etapa 2: Serve
-FROM nginx:alpine
-# Copiamos la configuración de Nginx optimizada para producción
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copiamos los archivos generados por Astro (carpeta dist/) al directorio de Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
-
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Configurar el punto de entrada
+ENTRYPOINT ["/entrypoint.sh"]
