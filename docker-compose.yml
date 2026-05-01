@@ -16,8 +16,8 @@ services:
       - DOCKER_API_VERSION=1.40
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    # Revisa actualizaciones de 'mate-tinta-disparate' cada 300 segundos (5 minutos)
-    command: --interval 300 mate-tinta-disparate
+    # Revisa actualizaciones de 'mate-tinta-disparate' cada 30 segundos
+    command: --interval 30 mate-tinta-disparate
     restart: unless-stopped
 
 networks:
