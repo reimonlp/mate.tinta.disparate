@@ -45,18 +45,17 @@
         text-align: center;
         position: relative;
         z-index: 1;
-        margin-bottom: 10px;
     }
     .logo-flyer {
         position: absolute;
-        top: 45mm; /* Debajo del título, como un sello de aprobación */
-        left: 55%; /* Más hacia el centro, desplazado a la derecha del eje */
+        top: 16mm; /* Debajo del título, como un sello de aprobación */
+        left: 73%; /* Más hacia el centro, desplazado a la derecha del eje */
         width: 22mm;
         height: 22mm;
         border-radius: 50%;
         border: 2px solid #000;
         overflow: hidden;
-        z-index: 2;
+        z-index: -1;
         transform: rotate(12deg); /* Un poco más de rotación para el efecto sello */
     }
     .logo-flyer img {
@@ -95,7 +94,7 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
-        margin: 20px 0;
+        margin: 0 0 20px 0;
         position: relative;
         z-index: 1;
     }
@@ -159,8 +158,16 @@
     .qr-container {
         width: 30%;
         display: flex;
+        flex-direction: column; /* Cambiado a columna para el label */
         justify-content: flex-end;
         align-items: flex-end;
+    }
+    .qr-label {
+        font-size: 8px;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+        letter-spacing: 0.5px;
     }
     .qr-container img {
         width: 100%;
@@ -229,6 +236,7 @@
             </div>
             
             <div class="qr-container">
+                <span class="qr-label">+ INFO</span>
                 <!-- Se usa una API gratuita que genera el QR apuntando directo a tu Instagram -->
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://instagram.com/mate.tinta.disparate&margin=0" alt="Código QR de Instagram">
             </div>
