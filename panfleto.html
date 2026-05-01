@@ -40,19 +40,24 @@
     .decor-mancha { width: 40mm; top: -10mm; left: -15mm; }
     .decor-garabato { width: 25mm; bottom: 45mm; right: 5mm; }
 
-    /* SECCIÓN SUPERIOR: Volanta y Título */
+    /* SECCIÓN SUPERIOR: Logo, Volanta y Título */
     .header-section {
         text-align: center;
         position: relative;
         z-index: 1;
+        margin-bottom: 10px;
     }
     .logo-flyer {
-        width: 20mm;
-        height: 20mm;
+        position: absolute;
+        top: 52mm; /* Altura aproximada de la primera línea del medio */
+        left: 65%; /* Correrlo a la derecha (50% más allá del centro aprox) */
+        width: 22mm;
+        height: 22mm;
         border-radius: 50%;
         border: 2px solid #000;
-        margin: 0 auto 10px;
         overflow: hidden;
+        z-index: 2;
+        transform: rotate(5deg); /* Un toque de rotación para el estilo */
     }
     .logo-flyer img {
         width: 100%;
