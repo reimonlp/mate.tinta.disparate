@@ -1,89 +1,172 @@
 ---
-import '../../styles/global.css';
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Obtener datos reales para las métricas
+const dudas = await getCollection('dudas');
+const encuentros = await getCollection('encuentros');
+const comunidad = await getCollection('comunidad');
+
+const photosDir = path.join(process.cwd(), 'public/photos');
+let photoCount = 0;
+if (fs.existsSync(photosDir)) {
+  const files = fs.readdirSync(photosDir);
+  photoCount = files.filter(file => /\.(jpg|jpeg|png|webp|gif)$/i.test(file)).length;
+}
+
+const stats = [
+  { label: 'Fotos en Galería', count: photoCount, icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>', color: '#3b82f6' },
+  { label: 'Reseñas', count: comunidad.length, icon: '<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>', color: '#10b981' },
+  { label: 'Sedes & Fechas', count: encuentros.length, icon: '<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>', color: '#f59e0b' },
+  { label: 'Dudas (FAQ)', count: dudas.length, icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>', color: '#8b5cf6' },
+];
 ---
-<!doctype html>
-<html lang="es">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Panel de Administración</title>
-	<style>
-		body {
-			margin: 0;
-			font-family: 'DM Sans', sans-serif;
-			display: flex;
-			height: 100vh;
-			background-color: #f9f9f9;
-		}
-		.sidebar {
-			width: 250px;
-			background-color: #1a1a1a;
-			color: #fff;
-			display: flex;
-			flex-direction: column;
-		}
-		.sidebar-header {
-			padding: 2rem 1rem;
-			text-align: center;
-			border-bottom: 1px solid #333;
-		}
-		.sidebar-nav {
-			flex: 1;
-			padding: 1rem 0;
-		}
-		.sidebar-nav a {
-			display: block;
-			padding: 1rem 1.5rem;
-			color: #ccc;
-			text-decoration: none;
-			transition: background-color 0.2s, color 0.2s;
-		}
-		.sidebar-nav a:hover, .sidebar-nav a.active {
-			background-color: #333;
-			color: #fff;
-		}
-		.main-content {
-			flex: 1;
-			padding: 2rem;
-			overflow-y: auto;
-		}
-		.card {
-			background: #fff;
-			padding: 1.5rem;
-			border-radius: 8px;
-			box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-			margin-bottom: 1rem;
-		}
-	</style>
-</head>
-<body>
-	<aside class="sidebar">
-		<div class="sidebar-header">
-			<h3>Admin Panel</h3>
-			<p style="font-size: 0.8rem; color: #888;">Mate, Tinta y Disparate</p>
-		</div>
-		<nav class="sidebar-nav">
-			<a href="/admin" class="active">Dashboard</a>
-			<a href="#">Galería</a>
-			<a href="#">Comunidad</a>
-			<a href="#">Dudas (FAQ)</a>
-			<a href="#">Encuentros</a>
-			<a href="/cloud" style="color: #ff9f43; border-top: 1px solid #333; margin-top: 1rem; padding-top: 1.5rem;">☁️ Archivos Cloud</a>
-			<a href="/" style="border-top: 1px solid #333; margin-top: 1rem; padding-top: 1.5rem;">← Volver al sitio</a>
-		</nav>
-	</aside>
 
-	<main class="main-content">
-		<header style="margin-bottom: 2rem;">
-			<h1 style="margin: 0; font-family: 'DM Serif Display', serif;">Bienvenida al panel</h1>
-			<p style="color: #666;">Selecciona una opción en el menú lateral para gestionar el contenido.</p>
-		</header>
+<AdminLayout title="Dashboard">
+  <header>
+    <h1 class="page-title">Resumen del Sitio</h1>
+    <p class="page-description">Aquí podés ver un pantallazo rápido del contenido publicado en tu web.</p>
+  </header>
 
-		<div class="card">
-			<h2>Resumen</h2>
-			<p>Este panel es un boceto para la futura administración de contenidos. Desde aquí podrás subir fotos, editar reseñas y gestionar las fechas de los encuentros.</p>
-			<p><strong>Nota:</strong> El sistema de Archivos Cloud estará disponible próximamente.</p>
-		</div>
-	</main>
-</body>
-</html>
+  <!-- Métricas -->
+  <div class="stats-grid">
+    {stats.map(stat => (
+      <div class="stat-card">
+        <div class="stat-icon" style={`color: ${stat.color}; background-color: ${stat.color}15;`} set:html={stat.icon}></div>
+        <div class="stat-info">
+          <h3>{stat.count}</h3>
+          <p>{stat.label}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Acciones Rápidas -->
+  <div class="quick-actions">
+    <h2>Acciones Rápidas</h2>
+    <div class="actions-grid">
+      <button class="action-btn" onclick="alert('Esta función estará disponible próximamente.')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+        Subir Foto Nueva
+      </button>
+      <button class="action-btn" onclick="alert('Esta función estará disponible próximamente.')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        Añadir Reseña
+      </button>
+      <button class="action-btn" onclick="alert('Esta función estará disponible próximamente.')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        Actualizar Fechas
+      </button>
+    </div>
+  </div>
+
+  <style>
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background-color: var(--admin-surface);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--admin-border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-icon :global(svg) {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .stat-info h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--admin-text);
+      line-height: 1.2;
+    }
+
+    .stat-info p {
+      font-size: 0.9rem;
+      color: var(--admin-text-muted);
+      margin: 0;
+    }
+
+    /* Quick Actions */
+    .quick-actions h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--admin-text);
+      margin-bottom: 1.5rem;
+    }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .action-btn {
+      background-color: var(--admin-surface);
+      border: 1px dashed var(--admin-border);
+      padding: 1.2rem;
+      border-radius: 10px;
+      color: var(--admin-text);
+      font-size: 0.95rem;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .action-btn svg {
+      width: 24px;
+      height: 24px;
+      color: var(--admin-primary);
+      transition: transform 0.2s ease;
+    }
+
+    .action-btn:hover {
+      border-color: var(--admin-primary);
+      color: var(--admin-primary);
+      background-color: #f9fafb;
+    }
+
+    .action-btn:hover svg {
+      transform: scale(1.1);
+    }
+  </style>
+</AdminLayout>
