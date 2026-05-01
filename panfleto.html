@@ -152,5 +152,25 @@
 
     </div>
 
+    <!-- SCRIPT DE DESARROLLO: Recarga automática al detectar cambios (funciona con servidor local) -->
+    <script>
+        (function() {
+            let lastModified = null;
+            async function checkChanges() {
+                try {
+                    const response = await fetch(window.location.href, { method: 'HEAD', cache: 'no-cache' });
+                    const currentModified = response.headers.get('Last-Modified');
+                    if (lastModified && lastModified !== currentModified) {
+                        location.reload();
+                    }
+                    lastModified = currentModified;
+                } catch (e) {
+                    // Silenciar errores si el servidor no soporta HEAD o no hay conexión
+                }
+                setTimeout(checkChanges, 1000);
+            }
+            checkChanges();
+        })();
+    </script>
 </body>
 </html>
