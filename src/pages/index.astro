@@ -1,17 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import fs from 'node:fs';
 import path from 'node:path';
 
 // Colecciones dinámicas
 const dudasEntries = await getCollection('dudas');
-const dudas = dudasEntries.sort((a, b) => a.data.orden - b.data.orden);
+const dudas = dudasEntries.sort((a, b) => (a.data.orden || 0) - (b.data.orden || 0));
+const dudasRendered = await Promise.all(dudas.map(async (d) => {
+  const { Content } = await render(d);
+  return { ...d, Content };
+}));
 
 const encuentrosEntries = await getCollection('encuentros');
-const encuentros = encuentrosEntries.sort((a, b) => a.data.orden - b.data.orden);
+const encuentros = encuentrosEntries.sort((a, b) => (a.data.orden || 0) - (b.data.orden || 0));
 
 const comunidadEntries = await getCollection('comunidad');
+const comunidadRendered = await Promise.all(comunidadEntries.map(async (c) => {
+  const { Content } = await render(c);
+  return { ...c, Content };
+}));
 
 // Lectura dinámica de fotos
 const photosDir = path.join(process.cwd(), 'public/photos');
@@ -103,13 +111,15 @@ if (fs.existsSync(photosDir)) {
     <span class="section-label">03 · Dudas</span>
     <h2>Preguntas frecuentes</h2>
     <div class="faq-container">
-      {dudas.map((duda) => (
+      {dudasRendered.map((duda) => (
         <details class="faq-item" name="faq">
           <summary>
             <span class="faq-pregunta">{duda.data.pregunta}</span>
             <div class="faq-icon"></div>
           </summary>
-          <p class="faq-respuesta" set:html={duda.body}></p>
+          <div class="faq-respuesta">
+            <duda.Content />
+          </div>
         </details>
       ))}
     </div>
@@ -150,16 +160,16 @@ if (fs.existsSync(photosDir)) {
     <h2>Lo que dicen</h2>
     <div class="resenas-container" aria-live="polite">
       <div class="resenas-track">
-        {comunidadEntries.map(resena => (
+        {comunidadRendered.map(resena => (
           <div class="resena-card">
-            <p class="resena-texto" set:html={resena.body}></p>
+            <div class="resena-texto"><resena.Content /></div>
             <span class="resena-autor">{resena.data.autor}</span>
           </div>
         ))}
         <!-- Duplicados para scroll infinito -->
-        {comunidadEntries.map(resena => (
+        {comunidadRendered.map(resena => (
           <div class="resena-card">
-            <p class="resena-texto" set:html={resena.body}></p>
+            <div class="resena-texto"><resena.Content /></div>
             <span class="resena-autor">{resena.data.autor}</span>
           </div>
         ))}
