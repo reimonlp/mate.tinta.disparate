@@ -103,7 +103,7 @@ const stats = [
               <td>{item.data.autor}</td>
               <td class="truncate">{item.body.substring(0, 50)}...</td>
               <td class="actions-cell">
-                <button class="btn-edit" onclick={`editComunidad('${item.id}', '${item.data.autor?.replace(/'/g, "\\'")}', \`${item.body.replace(/`/g, '\\`')}\`)`}>Editar</button>
+                <button class="btn-edit" data-id={item.id} data-autor={item.data.autor} data-text={item.body} onclick="editComunidad(this)">Editar</button>
                 <button class="btn-danger" onclick={`deleteItem('comunidad', '${item.id}')`}>Eliminar</button>
               </td>
             </tr>
@@ -131,7 +131,7 @@ const stats = [
               <td>{item.data.dia} {item.data.horario}</td>
               <td>{item.data.direccion}</td>
               <td class="actions-cell">
-                <button class="btn-edit" onclick={`editEncuentro('${item.id}', ${JSON.stringify(item.data).replace(/"/g, '&quot;')})`}>Editar</button>
+                <button class="btn-edit" data-id={item.id} data-payload={JSON.stringify(item.data)} onclick="editEncuentro(this)">Editar</button>
                 <button class="btn-danger" onclick={`deleteItem('encuentros', '${item.id}')`}>Eliminar</button>
               </td>
             </tr>
@@ -158,7 +158,7 @@ const stats = [
               <td>{item.data.pregunta}</td>
               <td class="truncate">{item.body.substring(0, 50)}...</td>
               <td class="actions-cell">
-                <button class="btn-edit" onclick={`editDuda('${item.id}', '${item.data.pregunta?.replace(/'/g, "\\'")}', ${item.data.orden}, \`${item.body.replace(/`/g, '\\`')}\`)`}>Editar</button>
+                <button class="btn-edit" data-id={item.id} data-pregunta={item.data.pregunta} data-orden={item.data.orden} data-text={item.body} onclick="editDuda(this)">Editar</button>
                 <button class="btn-danger" onclick={`deleteItem('dudas', '${item.id}')`}>Eliminar</button>
               </td>
             </tr>
@@ -416,11 +416,11 @@ const stats = [
       openModal('modal-comunidad');
     });
 
-    function editComunidad(id, autor, text) {
+    function editComunidad(btn) {
       document.getElementById('title-comunidad').innerText = 'Editar Reseña';
-      document.getElementById('comunidad-id').value = id;
-      document.getElementById('comunidad-autor').value = autor;
-      document.getElementById('comunidad-text').value = text;
+      document.getElementById('comunidad-id').value = btn.getAttribute('data-id') || '';
+      document.getElementById('comunidad-autor').value = btn.getAttribute('data-autor') || '';
+      document.getElementById('comunidad-text').value = btn.getAttribute('data-text') || '';
       openModal('modal-comunidad');
     }
 
@@ -461,9 +461,11 @@ const stats = [
       openModal('modal-encuentro');
     });
 
-    function editEncuentro(id, data) {
+    function editEncuentro(btn) {
+      const id = btn.getAttribute('data-id');
+      const data = JSON.parse(btn.getAttribute('data-payload') || '{}');
       document.getElementById('title-encuentro').innerText = 'Editar Sede';
-      document.getElementById('encuentro-id').value = id;
+      document.getElementById('encuentro-id').value = id || '';
       document.getElementById('encuentro-nombre').value = data.nombre || '';
       document.getElementById('encuentro-dia').value = data.dia || '';
       document.getElementById('encuentro-horario').value = data.horario || '';
@@ -515,12 +517,12 @@ const stats = [
       openModal('modal-duda');
     });
 
-    function editDuda(id, pregunta, orden, text) {
+    function editDuda(btn) {
       document.getElementById('title-duda').innerText = 'Editar Pregunta';
-      document.getElementById('duda-id').value = id;
-      document.getElementById('duda-pregunta').value = pregunta;
-      document.getElementById('duda-orden').value = orden;
-      document.getElementById('duda-text').value = text;
+      document.getElementById('duda-id').value = btn.getAttribute('data-id') || '';
+      document.getElementById('duda-pregunta').value = btn.getAttribute('data-pregunta') || '';
+      document.getElementById('duda-orden').value = btn.getAttribute('data-orden') || '0';
+      document.getElementById('duda-text').value = btn.getAttribute('data-text') || '';
       openModal('modal-duda');
     }
 

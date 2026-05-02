@@ -33,7 +33,8 @@ export const PUT: APIRoute = async ({ request }) => {
 
     if (!id || !pregunta || !text) return new Response(JSON.stringify({ error: 'Faltan datos' }), { status: 400 });
 
-    const filePath = path.join(process.cwd(), 'src', 'content', 'dudas', id);
+    const targetId = id.endsWith('.md') ? id : `${id}.md`;
+    const filePath = path.join(process.cwd(), 'src', 'content', 'dudas', targetId);
     if (!fs.existsSync(filePath)) return new Response(JSON.stringify({ error: 'Archivo no encontrado' }), { status: 404 });
 
     const content = generateMarkdown({ pregunta, orden: Number(orden) || 0 }, text);
@@ -54,7 +55,8 @@ export const DELETE: APIRoute = async ({ request }) => {
 
     if (!id) return new Response(JSON.stringify({ error: 'Falta el id' }), { status: 400 });
 
-    const filePath = path.join(process.cwd(), 'src', 'content', 'dudas', id);
+    const targetId = id.endsWith('.md') ? id : `${id}.md`;
+    const filePath = path.join(process.cwd(), 'src', 'content', 'dudas', targetId);
     if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
 
     await commitAndPush(`Admin: Eliminada duda ${id}`);

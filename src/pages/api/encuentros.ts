@@ -36,7 +36,8 @@ export const PUT: APIRoute = async ({ request }) => {
 
     if (!id || !nombre || !dia) return new Response(JSON.stringify({ error: 'Faltan datos' }), { status: 400 });
 
-    const filePath = path.join(process.cwd(), 'src', 'content', 'encuentros', id);
+    const targetId = id.endsWith('.md') ? id : `${id}.md`;
+    const filePath = path.join(process.cwd(), 'src', 'content', 'encuentros', targetId);
     if (!fs.existsSync(filePath)) return new Response(JSON.stringify({ error: 'Archivo no encontrado' }), { status: 404 });
 
     const content = generateMarkdown({
@@ -60,7 +61,8 @@ export const DELETE: APIRoute = async ({ request }) => {
 
     if (!id) return new Response(JSON.stringify({ error: 'Falta el id' }), { status: 400 });
 
-    const filePath = path.join(process.cwd(), 'src', 'content', 'encuentros', id);
+    const targetId = id.endsWith('.md') ? id : `${id}.md`;
+    const filePath = path.join(process.cwd(), 'src', 'content', 'encuentros', targetId);
     if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
 
     await commitAndPush(`Admin: Eliminada sede ${id}`);
