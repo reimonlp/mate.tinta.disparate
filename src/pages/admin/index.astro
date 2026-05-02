@@ -339,15 +339,33 @@ const stats = [
       document.getElementById(id).classList.remove('active');
     }
 
-    // Pestañas
-    document.querySelectorAll('.tab-btn').forEach(btn => {
+    // Pestañas (botones superiores y sidebar)
+    document.querySelectorAll('.tab-btn, .nav-item[data-target]').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        if (e.currentTarget.tagName === 'A') e.preventDefault();
+        
+        const target = e.currentTarget.dataset.target;
+        
+        document.querySelectorAll('.tab-btn, .nav-item[data-target]').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        const target = e.target.dataset.target;
-        e.target.classList.add('active');
+        
+        document.querySelectorAll(`.tab-btn[data-target="${target}"], .nav-item[data-target="${target}"]`).forEach(b => b.classList.add('active'));
         document.getElementById(target).classList.add('active');
+        localStorage.setItem('adminActiveTab', target);
+        
+        // Cerrar sidebar en mobile
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar && window.innerWidth <= 768) sidebar.classList.remove('open');
       });
+    });
+
+    // Restaurar pestaña activa al recargar
+    document.addEventListener('DOMContentLoaded', () => {
+      const activeTab = localStorage.getItem('adminActiveTab');
+      if (activeTab) {
+        const btn = document.querySelector(`.tab-btn[data-target="${activeTab}"]`);
+        if (btn) btn.click();
+      }
     });
 
     // Cerrar modales
