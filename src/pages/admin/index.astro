@@ -1,5 +1,7 @@
 ---
 import AdminLayout from '../../layouts/AdminLayout.astro';
+import StatCard from '../../components/admin/StatCard.astro';
+import AdminModal from '../../components/admin/AdminModal.astro';
 import { getCollection } from 'astro:content';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -44,13 +46,7 @@ const stats = [
   <section id="dashboard" class="tab-content active">
     <div class="stats-grid">
       {stats.map(stat => (
-        <div class="stat-card">
-          <div class="stat-icon" style={`color: ${stat.color}; background-color: ${stat.color}15;`} set:html={stat.icon}></div>
-          <div class="stat-info">
-            <h3>{stat.count}</h3>
-            <p>{stat.label}</p>
-          </div>
-        </div>
+        <StatCard {...stat} />
       ))}
     </div>
 
