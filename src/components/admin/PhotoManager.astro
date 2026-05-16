@@ -11,7 +11,7 @@ const { photos } = Astro.props;
   <div class="photos-grid" id="photos-container">
     {photos.map(photo => (
       <div class="photo-card" data-photo-id={photo}>
-        <img src={`/photos/${photo}`} alt={photo} loading="lazy" />
+        <img src={encodeURI(`/photos/${photo}`)} alt={photo} loading="lazy" />
         <div class="photo-actions">
           <button class="btn-danger btn-sm" onclick={`deleteItem('photos', '${photo}')`}>Eliminar</button>
         </div>
