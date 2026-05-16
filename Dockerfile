@@ -1,16 +1,23 @@
 FROM node:22-alpine
 
-# Instalar git para el script de sincronización
+# Instalar git y bash
 RUN apk add --no-cache git bash
 
 WORKDIR /app
 
-# Copiar el script de entrada (asegurarse que tenga permisos de ejecución)
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Copiar archivos de configuración primero para aprovechar caché
+COPY package*.json ./
+COPY astro.config.mjs ./
+COPY tsconfig.json ./
 
-# Exponer el puerto por defecto de Astro SSR
+# Copiar el resto del código (incluyendo entrypoint)
+COPY . .
+
+# Dar permisos de ejecución al entrypoint
+RUN chmod +x /app/entrypoint.sh
+
+# Exponer puerto de Astro
 EXPOSE 80
 
-# Configurar el punto de entrada
-ENTRYPOINT ["/entrypoint.sh"]
+# Usar el entrypoint desde /app
+ENTRYPOINT ["/app/entrypoint.sh"]
