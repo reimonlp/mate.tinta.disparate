@@ -19,5 +19,5 @@ RUN chmod +x /app/entrypoint.sh
 # Exponer puerto de Astro
 EXPOSE 80
 
-# Usar el entrypoint desde /app
-ENTRYPOINT ["/app/entrypoint.sh"]
+# Usar el entrypoint
+CMD ["/bin/sh", "/app/entrypoint.sh"]

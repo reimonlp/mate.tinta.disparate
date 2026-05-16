@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "--- MATE TINTA DISPARATE DIAGNOSTIC ---"
 echo "Current user: $(whoami)"
