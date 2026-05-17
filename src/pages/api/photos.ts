@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import sharp from 'sharp';
 import { commitAndPush } from '../../utils/git';
 
@@ -20,9 +21,9 @@ export const POST: APIRoute = async ({ request }) => {
       .webp({ quality: 80 })
       .toBuffer();
 
-    // Generar nombre seguro con extensión .webp
-    const baseName = path.parse(name).name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
-    const finalFileName = `${baseName}-${Date.now()}.webp`;
+    // Generar nombre basado en hash del contenido (optimizado)
+    const hash = crypto.createHash('sha256').update(optimizedBuffer).digest('hex').substring(0, 12);
+    const finalFileName = `${hash}.webp`;
 
     const publicPath = path.join(process.cwd(), 'public', 'photos', finalFileName);
     fs.writeFileSync(publicPath, optimizedBuffer);
